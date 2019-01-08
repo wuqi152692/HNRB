@@ -9,9 +9,12 @@ import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,9 +65,12 @@ import com.hnzx.hnrb.ui.news.CommentActivity;
 import com.hnzx.hnrb.ui.news.NewsDetailsActivity;
 import com.hnzx.hnrb.view.MultiStateView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.pili.pldroid.player.PLOnBufferingUpdateListener;
 import com.pili.pldroid.player.PLOnCompletionListener;
+import com.pili.pldroid.player.PLOnErrorListener;
 import com.pili.pldroid.player.PLOnInfoListener;
 import com.pili.pldroid.player.PLOnPreparedListener;
+import com.pili.pldroid.player.PLOnSeekCompleteListener;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.umeng.socialize.UMShareAPI;
 
@@ -115,6 +121,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     public static int BACKUP_PLAYING_BUFFERING_STATE = -1;
 
     private String url = "";
+    private int CurrentPosition = 0;
 
     private Handler  DISMISS_CONTROL_VIEW_HANDLER;
     private Runnable DismissControlViewRunnable;
@@ -154,6 +161,8 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
+
+        Log.d("activitystate", "initViews:--- ");
 
         ((TextView) findViewById(R.id.title)).setText("视频");
         share = (ImageView) findViewById(R.id.other);
@@ -227,13 +236,42 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onInfo(int what, int extra) {
                 // 第一帧视频播放成功时
-                if (what == MEDIA_INFO_VIDEO_RENDERING_START) {
-                    Log.d("setUiWitStateAndScreen", "onInfo: -------------------------");
-//
-                    currentState = CURRENT_STATE_PLAYING;
-//
-                    changeUiToPlayingClear();
+                switch (what) {
+                    case MEDIA_INFO_VIDEO_RENDERING_START:
 
+                        currentState = CURRENT_STATE_PLAYING;
+                        changeUiToPlayingClear();
+                        Log.d("activitystate", "currentState: "+currentState);
+
+                        break;
+
+                    case MEDIA_INFO_BUFFERING_START:
+                        Log.d("loadingshow", "start");
+                        break;
+
+                    case MEDIA_INFO_BUFFERING_END:
+                        Log.d("loadingshow", "end ");
+                        break;
+
+                    case MEDIA_INFO_CACHE_DOWN:
+                        Log.d("loadingshow", "down: ");
+                        break;
+
+                    case MEDIA_INFO_LOOP_DONE:
+                        Log.d("loadingshow", "loop");
+                        break;
+
+                    case MEDIA_INFO_CACHED_COMPLETE:
+                        Log.d("loadingshow", "complete");
+                        break;
+
+                    case MEDIA_INFO_IS_SEEKING:
+                        Log.d("loadingshow", "seeking");
+                        break;
+
+                    default:
+//                            Log.d("loadingshow", "  ---  "+extra);
+                        break;
                 }
             }
         });
@@ -246,6 +284,39 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 setUiWithStateAndScreen(currentState);
             }
         });
+
+
+        //错误信息监听
+        mVideoView.setOnErrorListener(new PLOnErrorListener() {
+            @Override
+            public boolean onError(int i) {
+
+                currentState = CURRENT_STATE_ERROR;
+                setUiWithStateAndScreen(currentState);
+                return true;
+            }
+        });
+
+        //seek完成的消息
+        mVideoView.setOnSeekCompleteListener(new PLOnSeekCompleteListener() {
+            @Override
+            public void onSeekComplete() {
+
+                Log.d("loadingshow", "  seek完成了  ");
+            }
+        });
+
+        // 缓存百分比
+        mVideoView.setOnBufferingUpdateListener(new PLOnBufferingUpdateListener() {
+            @Override
+            public void onBufferingUpdate(int i) {
+//                Log.d("loadingshow", "  缓存百分比  "+i);
+            }
+        });
+
+
+        // 播放状态监听
+
 
 
         recyclerView = (XRecyclerView) findViewById(R.id.recyclerView);
@@ -403,7 +474,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 commentNum.setText(String.valueOf(vedioInfo.comment));
                 collect.setChecked(response.Info.is_favor == 1);
                 //处理视频
-                GetNewsDetalisRsp.MyvideoBean myvideoBean = vedioInfo.myvideo.get(0);
+                final GetNewsDetalisRsp.MyvideoBean myvideoBean = vedioInfo.myvideo.get(0);
 
                 player.setUp(myvideoBean.filepath, JCVideoPlayer.SCREEN_LAYOUT_NORMAL, "");
                 GlideTools.GlideRounded(VideoDetailsActivity.this, myvideoBean.filethumb, player.thumbImageView, R.drawable.bg_morentu_datumoshi, 0);
@@ -427,20 +498,31 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                         } else {
 
 
-                            if (mVideoView.getCurrentPosition()==0){
+
+                            if (mVideoView.getCurrentPosition()==0 && CurrentPosition==0){
                                 currentState = CURRENT_STATE_PREPARING;
                             } else {
                                 currentState = CURRENT_STATE_PLAYING;
                             }
 
                             updateStartImage();
+
+
+
                             //继续播放
                             mVideoView.start();
                             SeekHandler.sendEmptyMessage(UPDATE_CSEEK);
+
+                            if (CurrentPosition!=0){
+
+                                mVideoView.seekTo(CurrentPosition);
+                            }
+
+                            Log.d("activitystate", "getCurrentPosition: "+mVideoView.getCurrentPosition());
                         }
-
+                        Log.d("activitystate", "currentState: "+currentState);
                         setUiWithStateAndScreen(currentState);
-
+                        
                     }
                 });
 
@@ -449,19 +531,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    @Override
-    public void onBackPressed() {
-        if (JCVideoPlayer.backPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        JCVideoPlayer.releaseAllVideos();
-    }
 
 
 
@@ -1093,11 +1162,16 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                cancelDismissControlViewHandler();
                 SeekHandler.removeMessages(UPDATE_CSEEK);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                if (mVideoView.isPlaying()){
+                    startDismissControlViewHandler();
+                }
+
                 int progress = seekBar.getProgress();
                 // 令视频播放进度遵循seekBar停止拖动的这一刻的进度
                 mVideoView.seekTo(progress);
@@ -1155,11 +1229,13 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 //        });
 
 
+
         cbottomProgress.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        Log.d("click_", "onTouch: ");
                         cancelDismissControlViewHandler();
                         break;
                     case MotionEvent.ACTION_UP:
@@ -1190,6 +1266,57 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        mVideoView.seekTo(CurrentPosition);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+
+
+        // 记录播放进度
+        CurrentPosition = (int) mVideoView.getCurrentPosition();
+        // 当被activity被遮挡时，停止播放
+        mVideoView.stopPlayback();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        setUiWithStateAndScreen(CURRENT_STATE_NORMAL);
+//        mVideoView.seekTo(CurrentPosition);
+        mVideoView.setVideoPath(url);
+        Log.d("activitystate", "Restart: "+ (CurrentPosition!=0)+ "   "+CurrentPosition);
     }
 
 
