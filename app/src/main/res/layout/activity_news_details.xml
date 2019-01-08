@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/layout_news_detail_title_bar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@+id/layout"
+        android:background="#1a000000" />
+
+    <com.hnzx.hnrb.view.MultiStateView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/layout"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.hnzx.hnrb.view.MultiStateView>
+
+    <FrameLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fbfbfb"
+            android:gravity="center"
+            android:text="抱歉,本文不支持评论"
+            android:textColor="#b0b0b0"
+            android:textSize="36px"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/pinglunLayout"
+            android:layout_width="match_parent"
+            android:layout_height="98px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="35px"
+            android:paddingRight="34px">
+
+            <TextView
+                android:id="@+id/shuo"
+                android:layout_width="0dp"
+                android:layout_height="70px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_news_details_bottom_edittext"
+                android:gravity="center_vertical"
+                android:paddingLeft="30px"
+                android:textColor="#cacaca"
+                android:textSize="28px" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10px"
+                    android:layout_marginTop="6px"
+                    android:background="@drawable/comment_btn" />
+
+                <TextView
+                    android:id="@+id/pinglun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:background="@drawable/comment_num"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:minWidth="30px"
+                    android:padding="6px"
+                    android:textColor="@android:color/white"
+                    android:textSize="12px" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</com.zhy.autolayout.AutoRelativeLayout>

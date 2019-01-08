@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="30px">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="44px"
+        android:layout_height="44px"
+        android:scaleType="centerCrop"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="航班查询"
+        android:textColor="#343434"
+        android:textSize="28px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

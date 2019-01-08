@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/addImage"
+    android:layout_width="170px"
+    android:layout_height="170px"
+    android:layout_marginTop="20px"
+    android:background="@drawable/publish_add_image_bg"
+    android:gravity="bottom|center_horizontal"
+    android:paddingBottom="24px"
+    android:text="添加素材"
+    android:textColor="#9d9d9d"
+    android:textSize="26px" />

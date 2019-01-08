@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <!---->
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/find_pwd_topView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.hnzx.hnrb.view.TopHeadView>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="28px"
+        android:paddingRight="28px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28px"
+            android:layout_marginTop="28px"
+            android:text="@string/label_input_bind_mobile"
+            android:textColor="#000000"
+            android:textSize="30px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="102px"
+            android:background="@drawable/shape_border_gray_solid_gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="24px">
+
+            <EditText
+                android:id="@+id/find_pwd_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textSize="30px"
+                tools:text="1376272719" />
+
+            <TextView
+                android:id="@+id/find_pwd_sendSmsCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_border_gray_solid_deep"
+                android:gravity="center"
+                android:minWidth="178px"
+                android:paddingBottom="8px"
+                android:paddingLeft="15px"
+                android:paddingRight="15px"
+                android:paddingTop="8px"
+                android:text="@string/label_get_sms_code"
+                android:textColor="@android:color/black"
+                android:textSize="30px"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32px"
+            android:layout_marginTop="32px"
+            android:text="请输入收到的验证码"
+            android:textColor="#000000"
+            android:textSize="30px" />
+
+        <EditText
+            android:id="@+id/find_pwd_smsCode"
+            android:layout_width="match_parent"
+            android:layout_height="102px"
+            android:padding="24px"
+            android:background="@drawable/shape_border_gray_solid_gray"
+            android:textSize="30px"
+            tools:text="4352" />
+
+        <LinearLayout
+            android:id="@+id/find_pwd_newPwdContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32px"
+                android:layout_marginTop="32px"
+                android:text="请输入新密码"
+                android:textColor="#000000"
+                android:textSize="30px" />
+
+            <EditText
+                android:id="@+id/find_pwd_newPwd"
+                android:layout_width="match_parent"
+                android:layout_height="102px"
+                android:padding="24px"
+                android:background="@drawable/shape_border_gray_solid_gray"
+                android:inputType="textPassword"
+                android:textSize="30px"
+                tools:text="1376272719" />
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/find_pwd_submit"
+            android:layout_width="match_parent"
+            android:layout_height="76px"
+            android:layout_marginLeft="76px"
+            android:layout_marginRight="76px"
+            android:layout_marginTop="108px"
+            android:background="@drawable/shape_red_radius"
+            android:gravity="center"
+            android:text="找回"
+            android:textColor="@android:color/white"
+            android:textSize="30px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</LinearLayout>

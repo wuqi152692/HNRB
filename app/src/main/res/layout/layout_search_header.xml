@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    tools:context="com.hnzx.hnrb.ui.SearchActivity">
+
+    <TextView
+        android:id="@+id/hotTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11px"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="42px"
+        android:text="热门资讯"
+        android:textColor="#7a797b"
+        android:textSize="28px" />
+
+    <com.hnzx.hnrb.view.FlowLayout
+        android:id="@+id/hotLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotTv" />
+
+    <TextView
+        android:id="@+id/historyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotLayout"
+        android:layout_marginBottom="11px"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="40px"
+        android:text="搜索历史"
+        android:textColor="#7a797b"
+        android:textSize="28px" />
+
+    <TextView
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/historyTv"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/historyTv"
+        android:gravity="center_vertical"
+        android:paddingLeft="24px"
+        android:paddingRight="16px"
+        android:text="清除"
+        android:textColor="#ff545b"
+        android:textSize="26px" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingTop="80px">
+
+    <com.zhy.autolayout.AutoFrameLayout
+        android:id="@+id/bannerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.hnzx.hnrb.view.AutoScrollViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="424px"
+            app:layout_auto_basewidth="height" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="94px"
+            android:layout_gravity="bottom"
+            android:background="@drawable/home_pager_banner_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_auto_basewidth="height">
+
+            <TextView
+                android:id="@+id/bannerTitle"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginRight="20px"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="高层动态"
+                android:textColor="@android:color/white"
+                android:textSize="38px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bannerIndex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10px"
+                android:text="1"
+                android:textColor="@android:color/white"
+                android:textSize="22px" />
+
+            <TextView
+                android:id="@+id/bannerLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"
+                android:textColor="#54ffffff"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/bannerTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="10px"
+                android:text="1"
+                android:textColor="#b3ffffff"
+                android:textSize="22px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoFrameLayout>
+
+
+    <TextView
+        android:id="@+id/hdTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19px"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="38px"
+        android:text="高层动态"
+        android:textColor="#87847d"
+        android:textSize="32px" />
+
+    <include
+        android:id="@+id/layout0"
+        layout="@layout/layout_high_dynamic_home_pager_item" />
+
+    <include
+        android:id="@+id/layout1"
+        layout="@layout/layout_high_dynamic_home_pager_item" />
+
+    <include
+        android:id="@+id/layout2"
+        layout="@layout/layout_high_dynamic_home_pager_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:layout_marginTop="22px"
+        android:background="#f2f2f2"
+        app:layout_auto_basewidth="height" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="26px"
+        android:paddingRight="26px"
+        android:paddingTop="10px">
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="精选"
+            android:textColor="#87847d"
+            android:textSize="32px" />
+
+        <CheckBox
+            android:id="@+id/typeList"
+            android:layout_width="60px"
+            android:layout_height="62px"
+            android:background="@drawable/home_pager_type_list"
+            android:button="@null"
+            android:checked="true"
+            app:layout_auto_basewidth="height" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+    
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/modify_nick_headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.hnzx.hnrb.view.TopHeadView>
+
+    <EditText
+        android:id="@+id/modify_nick_name"
+        android:layout_width="match_parent"
+        android:layout_height="102px"
+        android:padding="30px"
+        android:background="@drawable/shape_border_gray_solid_gray"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="30px"
+        tools:text="呵呵呵" />
+
+
+    <Button
+        android:id="@+id/modify_nick_submit"
+        android:layout_width="match_parent"
+        android:layout_height="76px"
+        android:layout_marginLeft="76px"
+        android:layout_marginRight="76px"
+        android:layout_marginTop="108px"
+        android:background="@drawable/shape_red_radius"
+        android:gravity="center"
+        android:text="修改"
+        android:textColor="@android:color/white"
+        android:textSize="30px" />
+
+
+</LinearLayout>

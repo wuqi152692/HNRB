@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70px"
+    android:layout_alignParentBottom="true"
+    android:background="#77000000">
+
+    <CheckBox
+        android:id="@+id/startPauseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="10px"
+        android:background="@drawable/live_player_state"
+        android:button="@null" />
+
+    <TextView
+        android:id="@+id/mediacontroller_time_total"
+        style="@style/MediaController_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="22px"
+        android:layout_toLeftOf="@+id/fullscreenBtn"
+        android:text="33:33"
+        android:textSize="24px" />
+
+    <ImageView
+        android:id="@+id/fullscreenBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10px"
+        android:src="@drawable/bnt_fullscreen_nal" />
+
+    <SeekBar
+        android:id="@+id/mediacontroller_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/mediacontroller_time_total"
+        android:layout_toRightOf="@id/startPauseBtn"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:max="1000"
+        android:maxHeight="4px"
+        android:minHeight="4px"
+        android:paddingLeft="0px"
+        android:paddingRight="0px"
+        android:progress="500"
+        android:progressDrawable="@drawable/seekbar_live_player"
+        android:thumb="@null" />
+</RelativeLayout>

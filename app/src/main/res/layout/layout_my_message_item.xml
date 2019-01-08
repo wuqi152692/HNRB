@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="22px"
+        android:paddingTop="42px">
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="42px"
+            android:layout_height="42px"
+            android:layout_marginLeft="23px"
+            android:src="@drawable/comment_cricle" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18px"
+            android:maxLines="1"
+            android:text="中南海"
+            android:textColor="#898989"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/comment_time"
+            android:drawablePadding="10px"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="1小时前"
+            android:textColor="#898989"
+            android:textSize="24px" />
+
+        <CheckedTextView
+            android:id="@+id/supportBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="28px"
+            android:layout_marginLeft="10px"
+            android:drawablePadding="10px"
+            android:drawableRight="@drawable/comment_support_style"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="100"
+            android:textColor="@color/comment_support"
+            android:textSize="24px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:id="@+id/comment_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80px"
+        android:layout_marginTop="24px"
+        android:gravity="center_vertical"
+        android:text="1小时前"
+        android:textColor="#191919"
+        android:textSize="30px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="32px"
+        android:background="#1a000000"></View>
+
+</com.zhy.autolayout.AutoLinearLayout>

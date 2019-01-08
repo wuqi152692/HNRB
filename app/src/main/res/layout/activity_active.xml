@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hnzx.hnrb.ui.interact.TopicDetailActivity">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <com.hnzx.hnrb.view.MultiStateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/pinglunLayout"
+        android:layout_below="@+id/layout"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.zhy.autolayout.AutoRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="420px"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/activityTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/image"
+                    android:paddingLeft="24px"
+                    android:paddingRight="24px"
+                    android:paddingTop="30px"
+                    android:text="祈福圆梦想，手机拜轩辕，轻松赢好礼"
+                    android:textColor="#131313"
+                    android:textSize="36px" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/activityTitle"
+                    android:layout_marginTop="10px"
+                    android:paddingLeft="24px"
+                    android:paddingRight="24px"
+                    android:text="2016-04-08 19：15"
+                    android:textColor="#b7b7b7"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/date"
+                    android:layout_marginTop="18px"
+                    android:paddingLeft="24px"
+                    android:paddingRight="24px"
+                    android:text="地址：河南省农业路东28号河南日报报业大厦3层"
+                    android:textColor="#b7b7b7"
+                    android:textSize="24px" />
+
+                <FrameLayout
+                    android:id="@+id/webLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address"
+                    android:padding="24px" />
+
+                <TextView
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/number"
+                    android:layout_toLeftOf="@+id/number"
+                    android:text="剩余名额："
+                    android:textColor="#6e6c6c"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/webLayout"
+                    android:layout_marginBottom="28px"
+                    android:layout_marginRight="24px"
+                    android:text="29"
+                    android:textColor="#ff0000"
+                    android:textSize="44px" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/writeMsg"
+                    android:layout_below="@+id/number"
+                    android:background="#f2f2f2" />
+
+                <TextView
+                    android:id="@+id/startTimeKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/number"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="20px"
+                    android:text="开始时间"
+                    android:textColor="#6e6c6c"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/startTimeKey"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="14px"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="28px"
+                    android:text="2016-04-08"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/startTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_below="@+id/startTimeKey"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginRight="10px"
+                    android:layout_marginTop="14px"
+                    android:layout_toLeftOf="@+id/centerH"
+                    android:layout_toRightOf="@+id/startDate"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="22px"
+                    android:text="19:15"
+                    android:textColor="#4ea86a"
+                    android:textSize="24px" />
+
+                <View
+                    android:id="@+id/centerH"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/endTimeKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/number"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="20px"
+                    android:layout_toRightOf="@+id/centerH"
+                    android:text="结束时间"
+                    android:textColor="#6e6c6c"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_below="@+id/endTimeKey"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="14px"
+                    android:layout_toRightOf="@+id/centerH"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="28px"
+                    android:text="2016-04-08"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/endTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="90px"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/endTimeKey"
+                    android:layout_marginRight="28px"
+                    android:layout_marginTop="14px"
+                    android:layout_toRightOf="@+id/endDate"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="22px"
+                    android:text="19:15"
+                    android:textColor="#4ea86a"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/writeMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/startTime"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="28px"
+                    android:text="填写信息"
+                    android:textColor="#6e6c6c"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/nameKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/writeMsg"
+                    android:layout_marginLeft="28px"
+                    android:background="#f6f6f6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text="姓名："
+                    android:textColor="#6e6c6c"
+                    android:textSize="30px" />
+
+                <EditText
+                    android:id="@+id/nameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/writeMsg"
+                    android:layout_marginRight="28px"
+                    android:layout_toRightOf="@+id/nameKey"
+                    android:background="#f6f6f6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/telKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/nameET"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginTop="20px"
+                    android:background="#f6f6f6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:text="电话："
+                    android:textColor="#6e6c6c"
+                    android:textSize="30px" />
+
+                <EditText
+                    android:id="@+id/telET"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/nameET"
+                    android:layout_marginRight="28px"
+                    android:layout_marginTop="20px"
+                    android:layout_toRightOf="@+id/telKey"
+                    android:background="#f6f6f6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/signUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/telKey"
+                    android:layout_marginBottom="60px"
+                    android:layout_marginLeft="28px"
+                    android:layout_marginRight="28px"
+                    android:layout_marginTop="60px"
+                    android:background="@drawable/btn_sign_up_bg"
+                    android:gravity="center"
+                    android:text="报名"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoRelativeLayout>
+
+        </ScrollView>
+
+    </com.hnzx.hnrb.view.MultiStateView>
+</com.zhy.autolayout.AutoRelativeLayout>

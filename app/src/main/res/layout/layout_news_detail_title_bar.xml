@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="32px"
+    android:paddingTop="26px">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:scaleType="center"
+        android:src="@drawable/news_back" />
+
+    <Space
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/fontSize"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:scaleType="center"
+        android:src="@drawable/news_font" />
+
+    <android.support.design.widget.CheckableImageButton
+        android:id="@+id/collect"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:background="@android:color/transparent"
+        android:src="@drawable/news_collect_style"
+        app:layout_auto_basewidth="height" />
+
+    <ImageView
+        android:id="@+id/share"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:scaleType="center"
+        android:src="@drawable/news_share" />
+
+</com.zhy.autolayout.AutoLinearLayout>

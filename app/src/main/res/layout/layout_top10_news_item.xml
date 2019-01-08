@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <CheckedTextView
+        android:id="@+id/inOrder"
+        android:layout_width="162px"
+        android:layout_height="44px"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="28px"
+        android:background="@drawable/top10_in_order1_bg"
+        android:gravity="center_vertical|right"
+        android:paddingRight="18px"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="30px"
+        android:visibility="invisible"
+        app:layout_auto_basewidth="height" />
+
+    <CheckedTextView
+        android:id="@+id/inOrder1"
+        android:layout_width="162px"
+        android:layout_height="44px"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="28px"
+        android:background="@drawable/top10_in_order2_bg"
+        android:gravity="center_vertical|right"
+        android:paddingRight="18px"
+        android:textAlignment="gravity"
+        android:textColor="@color/top10_in_order2"
+        android:textSize="30px"
+        android:visibility="visible"
+        app:layout_auto_basewidth="height" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/inOrder"
+        android:layout_below="@+id/inOrder"
+        android:background="#ebe5e5" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="294px"
+        android:layout_height="166px"
+        android:layout_below="@+id/inOrder"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="18px"
+        android:scaleType="centerCrop"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image"
+        android:layout_marginLeft="24px"
+        android:layout_marginRight="40px"
+        android:layout_toRightOf="@+id/image"
+        android:maxLines="2"
+        android:text="123"
+        android:textColor="@android:color/black"
+        android:textSize="32px" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image"
+        android:layout_marginLeft="24px"
+        android:layout_toRightOf="@+id/image"
+        android:maxLines="1"
+        android:text="时政"
+        android:textColor="#979797"
+        android:textSize="20px" />
+
+    <TextView
+        android:id="@+id/look"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40px"
+        android:drawableLeft="@drawable/news_looknum"
+        android:drawablePadding="6px"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="12"
+        android:textColor="#979797"
+        android:textSize="20px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/image"
+        android:layout_below="@+id/image"
+        android:background="#ebe5e5" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

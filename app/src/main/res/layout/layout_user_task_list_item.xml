@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="28px"
+    android:paddingLeft="28px"
+    android:paddingRight="28px"
+    android:paddingTop="28px">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="每日签到"
+        android:textColor="#404040"
+        android:textSize="30px" />
+
+    <Space
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20px"
+        android:text="1/1"
+        android:textColor="#404040"
+        android:textSize="30px" />
+
+    <CheckedTextView
+        android:id="@+id/getPoint"
+        android:layout_width="116px"
+        android:layout_height="wrap_content"
+        android:background="@drawable/task_get_point_bg"
+        android:gravity="center"
+        android:paddingBottom="8px"
+        android:paddingTop="8px"
+        android:text="领取积分"
+        android:textAlignment="center"
+        android:textColor="@color/task_get_point_color"
+        android:textSize="24px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

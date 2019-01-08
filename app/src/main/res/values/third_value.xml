@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="__picker_pager_bg">#CA000000</color>
+    <color name="__picker_selected_bg">#44000000</color>
+    <color name="__picker_black_40">#282828</color>
+    <color name="__picker_common_primary">#f3f3f3</color>
+
+    <color name="__picker_text_40">#282828</color>
+    <color name="__picker_text_80">#505050</color>
+    <color name="__picker_text_120">#787878</color>
+    <color name="__picker_item_photo_border_selected">#ff99cc00</color>
+    <color name="__picker_item_photo_border_n">#33ffffff</color>
+
+
+    <dimen name="__picker_iwf_actionBarSize">48dip</dimen>
+    <dimen name="__picker_item_photo_size">80dip</dimen>
+    <dimen name="__picker_item_camera_size">80dip</dimen>
+    <dimen name="__picker_item_directory_height">80dp</dimen>
+
+
+    <string name="__picker_title">图片</string>
+    <string name="__picker_delete">删除</string>
+    <string name="__picker_done">确定</string>
+    <string name="__picker_done_with_count">选择(%1$d/%2$d)</string>
+    <string name="__picker_image_index">%1$d/%2$d</string>
+    <string name="__picker_undo">未选择</string>
+    <string name="__picker_deleted_a_photo">删除一张图片</string>
+    <string name="__picker_confirm_to_delete">确定删除?</string>
+    <string name="__picker_yes">是</string>
+    <string name="__picker_cancel">取消</string>
+    <string name="__picker_all_image">所有图片</string>
+    <string name="__picker_over_max_count_tips">已经选择了%1$d张图片</string>
+    <string name="__picker_image_count">%1$d</string>
+
+</resources>

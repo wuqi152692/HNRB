@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginBottom="16px"
+        android:layout_marginLeft="26px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="26px"
+        android:text="投票：欧冠8强抽签，你希望巴萨抽到哪只球队？"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="26px"
+        android:layout_marginRight="26px"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="欧冠八强赛在即， 德甲第25轮战罢，拜仁拿到62分，领先第二名莱比锡的积分多达13分。毫无疑问，这个优势"
+        android:textColor="#404040"
+        android:textSize="28px" />
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg"
+        android:layout_marginLeft="26px"
+        android:layout_marginRight="26px">
+
+        <TextView
+            android:id="@+id/support"
+            android:layout_width="308px"
+            android:layout_height="60px"
+            android:layout_above="@+id/time"
+            android:layout_marginLeft="12px"
+            android:layout_marginTop="40px"
+            android:background="@drawable/interact_vote_support_bg"
+            android:gravity="center"
+            android:text="希望"
+            android:textColor="@android:color/white"
+            android:textSize="28px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/unsupport"
+            android:layout_width="308px"
+            android:layout_height="60px"
+            android:layout_above="@+id/time"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12px"
+            android:layout_marginTop="40px"
+            android:background="@drawable/interact_vote_unsupport_bg"
+            android:gravity="center"
+            android:text="不希望"
+            android:textColor="@android:color/white"
+            android:textSize="28px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/supportValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42px"
+            android:lines="1"
+            android:text="40% 希望"
+            android:textColor="#fd7167"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/unsupportValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="42px"
+            android:lines="1"
+            android:text="60% 不希望"
+            android:textColor="#46a9ec"
+            android:textSize="28px" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:layout_above="@+id/time"
+            android:layout_below="@+id/supportValue"
+            android:layout_marginTop="12px"
+            android:max="100"
+            android:progress="40"
+            android:progressDrawable="@drawable/vote_progerss_drawable" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout"
+        android:layout_marginLeft="26px"
+        android:layout_marginTop="40px"
+        android:text="2017-03-30 15:12"
+        android:textColor="#979797"
+        android:textSize="24px" />
+
+    <TextView
+        android:id="@+id/lookNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/layout"
+        android:layout_marginLeft="26px"
+        android:layout_marginRight="26px"
+        android:layout_marginTop="40px"
+        android:drawableLeft="@drawable/news_looknum"
+        android:drawablePadding="10px"
+        android:text="1324"
+        android:textColor="#979797"
+        android:textSize="24px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/lookNum"
+        android:layout_marginTop="30px"
+        android:background="@color/line" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/modify_mobile_headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.hnzx.hnrb.view.TopHeadView>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="28px"
+        android:paddingRight="28px">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32px"
+            android:layout_marginTop="32px"
+            android:text="@string/label_input_current_mobile"
+            android:textColor="#000000"
+            android:textSize="30px" />
+
+        <EditText
+            android:id="@+id/modify_mobile_phone"
+            android:layout_width="match_parent"
+            android:layout_height="102px"
+            android:background="@drawable/shape_border_gray_solid_gray"
+            android:padding="24px"
+            android:textSize="30px"
+            tools:text="1376272719" />
+
+        <Button
+            android:id="@+id/modify_mobile_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="76px"
+            android:layout_marginRight="76px"
+            android:layout_marginTop="108px"
+            android:background="@drawable/shape_red_radius"
+            android:gravity="center"
+            android:minHeight="76px"
+            android:text="@string/label_sure"
+            android:textColor="@android:color/white"
+            android:textSize="30px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</LinearLayout>

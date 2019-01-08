@@ -1,0 +1,143 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "com.hnzx.hnrb"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 222
+        versionName "2.2.2"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', "x86"
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "5fefafdfa08c4377436264e7", //JPush上注册的包名对应的appkey.test:391edfe5e6cc4800cb28145b;apply:5fefafdfa08c4377436264e7
+                JPUSH_CHANNEL: "yingyongbao", //用户渠道统计的渠道名称
+                XIAOMI_APPKEY: "MI-5551744811320",    // 小米平台注册的 appkey
+                XIAOMI_APPID : "MI-2882303761517448320",    //	 小米平台注册的 appid
+                HUAWEI_APPID : "10604248",    //	 华为平台注册的 appid
+                MEIZU_APPKEY : "MZ-0d6b230c9f8c436eadca8eaaf4904532",    //	 魅族平台注册的 appkey
+                MEIZU_APPID  : "MZ-113698",    //	 魅族平台注册的 appid
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+
+
+/**
+ * 不注释掉，七牛云会报错
+ */
+//    sourceSets {
+//        main {
+//            java.srcDirs = ['src/main/java', 'src/main/java-gen']
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+
+
+
+
+    flavorDimensions "default"
+
+    productFlavors {
+        yingyongbao { dimension "default" }
+        mi { dimension "default" }
+        m360 { dimension "default" }
+        baidu { dimension "default" }
+        lenovo { dimension "default" }
+        huawei { dimension "default" }
+        meizu { dimension "default" }
+        mumayi { dimension "default" }
+        wandoujia { dimension "default" }
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    /**
+     android.applicationVariants.all {variant ->
+     variant.outputs.each {output ->
+     def outputFile = output.outputFile
+     if (outputFile != null && outputFile.name.endsWith('.apk')) {def fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+     //noinspection GroovyAssignabilityCheck,GroovyAssignabilityCheck
+     output.outputFile = new File(outputFile.parent, fileName)}}}**/
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/pldroid-player-2.1.6.jar')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation project(path: ':vitam')
+    implementation project(path: ':jcvideoplayer')
+//    implementation 'com.github.open-android:JieCaoVideoPlayer:0.1.0'   //------ 节操播放器
+    implementation project(path: ':xrecyclerview')
+    implementation 'com.android.support:multidex:1.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.isseiaoki:simplecropview:1.0.13'
+    implementation 'com.zhy:autolayout:1.4.5'
+    implementation 'com.alibaba:fastjson:1.2.12'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
+    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
+    implementation 'com.j256.ormlite:ormlite-android:4.48'
+    implementation 'com.j256.ormlite:ormlite-core:4.48'
+    implementation 'org.jsoup:jsoup:1.9.2'
+    implementation 'com.github.chrisbanes.photoview:library:1.2.4'
+    implementation 'com.github.bumptech.glide:glide:3.6.1'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.yanzhenjie:permission:1.0.8'
+    implementation 'cn.jiguang.sdk:jpush:3.1.3'
+    implementation 'cn.jiguang.sdk:jcore:1.2.1'
+    implementation 'cn.jiguang.sdk.plugin:xiaomi:3.1.3'
+    implementation 'cn.jiguang.sdk.plugin:huawei:3.1.3'
+    implementation 'cn.jiguang.sdk.plugin:meizu:3.1.3'
+    implementation 'com.aitangba:swipeback:1.0.2'
+    implementation 'com.umeng.sdk:common:1.5.0'
+    implementation 'com.umeng.sdk:analytics:7.5.0'
+    implementation 'junit:junit:4.12'
+    implementation files('libs/Sunflower.jar')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+}

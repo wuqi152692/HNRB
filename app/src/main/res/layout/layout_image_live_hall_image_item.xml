@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="30px">
+
+    <View
+        android:layout_width="2px"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/line"
+        android:layout_marginLeft="20px"
+        android:background="#979797" />
+
+    <ImageView
+        android:id="@+id/headImg"
+        android:layout_width="42px"
+        android:layout_height="42px"
+        android:layout_marginTop="70px"
+        android:scaleType="centerCrop"
+        android:src="@drawable/reporter_cricle_dark"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26px"
+        android:layout_marginRight="22px"
+        android:layout_marginTop="72px"
+        android:layout_toRightOf="@+id/headImg"
+        android:textColor="#262626"
+        android:textSize="30px"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="74px"
+        android:layout_toRightOf="@+id/name"
+        android:textColor="#b7b7b7"
+        android:textSize="24px" />
+
+    <com.zhy.autolayout.AutoFrameLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="624px"
+        android:layout_height="340px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/name"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="54px"
+        android:visibility="gone"
+        app:layout_auto_basewidth="height">
+
+        <ImageView
+            android:id="@+id/bigImg"
+            android:layout_width="624px"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:id="@+id/gif"
+            android:layout_width="96px"
+            android:layout_height="96px"
+            android:layout_gravity="center"
+            android:background="@drawable/gif_icon"
+            android:visibility="gone"
+            app:layout_auto_basewidth="height" />
+
+    </com.zhy.autolayout.AutoFrameLayout>
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="624px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/imageLayout"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="40px"
+        android:textColor="#262626"
+        android:textSize="30px" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/msg"
+        android:layout_marginLeft="-30px"
+        android:layout_marginTop="30px"
+        android:background="#f0f0f0" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

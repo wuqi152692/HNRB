@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SoundTrackView">
+        <attr name="track_color" format="color" />
+        <attr name="track_num" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontal_spacing" format="dimension"/>
+        <attr name="vertical_spacing" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="PlayView">
+        <attr name="Background" format="color"/>
+        <attr name="ColColor" format="color"/>
+    </declare-styleable>
+</resources>

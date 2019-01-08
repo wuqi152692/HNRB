@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingTop="42px">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="22px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/header"
+            android:layout_width="42px"
+            android:layout_height="42px"
+            android:layout_marginLeft="23px"
+            android:src="@drawable/comment_cricle"
+            app:layout_auto_basewidth="height" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18px"
+            android:maxLines="1"
+            android:text="中南海"
+            android:textColor="#898989"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/comment_time"
+            android:drawablePadding="10px"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="1小时前"
+            android:textColor="#898989"
+            android:textSize="24px" />
+
+        <CheckedTextView
+            android:id="@+id/supportBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:drawablePadding="10px"
+            android:drawableRight="@drawable/comment_support_style"
+            android:gravity="bottom"
+            android:maxLines="1"
+            android:text="100"
+            android:textAlignment="gravity"
+            android:textColor="@color/comment_support"
+            android:textSize="24px"
+            app:layout_auto_basewidth="height" />
+
+        <View
+            android:layout_width="4px"
+            android:layout_height="18px"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:background="#d0d0d0"
+            app:layout_auto_basewidth="height" />
+
+        <TextView
+            android:id="@+id/reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复"
+            android:textColor="#6e6c6c"
+            android:textSize="20px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:id="@+id/comment_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="22px"
+        android:layout_marginTop="24px"
+        android:gravity="center_vertical"
+        android:textColor="#191919"
+        android:textSize="30px" />
+
+    <LinearLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="22px"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/image0"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_marginRight="20px"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_auto_basewidth="height" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_marginRight="20px"
+            android:layout_weight="1"
+            app:layout_auto_basewidth="height"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            app:layout_auto_basewidth="height"
+            android:layout_weight="1"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/replaceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="22px"
+        android:layout_marginTop="24px"
+        android:background="#f2f2f2"
+        android:orientation="vertical"
+        android:paddingBottom="24px"
+        android:paddingLeft="32px"
+        android:paddingRight="28px"
+        android:paddingTop="26px"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/replaceMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#898989"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/replaceNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20px"
+            android:paddingTop="20px"
+            android:textColor="#191919"
+            android:textSize="20px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="32px"
+        android:background="#f0f0f0" />
+
+</com.zhy.autolayout.AutoLinearLayout>

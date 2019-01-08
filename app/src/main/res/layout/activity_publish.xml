@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hnzx.hnrb.ui.live.PublishActivity">
+
+    <com.zhy.autolayout.AutoFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/layout_top_liner" />
+
+        <TextView
+            android:id="@+id/publish"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:paddingLeft="28px"
+            android:paddingRight="28px"
+            android:text="提交"
+            android:textColor="@android:color/black" />
+
+    </com.zhy.autolayout.AutoFrameLayout>
+
+    <EditText
+        android:id="@+id/mEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="请输入报道内容"
+        android:minHeight="400px"
+        android:padding="28px"
+        android:textColor="@android:color/black"
+        android:textColorHint="#9d9d9d"
+        android:textSize="26px" />
+
+    <TextView
+        android:id="@+id/mTextViewLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="right"
+        android:paddingRight="28px"
+        android:text="300字"
+        android:textColor="#9d9d9d"
+        android:textSize="26px" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="28px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

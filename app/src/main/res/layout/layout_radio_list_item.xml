@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="50px"
+        android:paddingLeft="28px"
+        android:paddingRight="16px"
+        android:paddingTop="60px">
+
+        <com.zhy.autolayout.AutoFrameLayout
+            android:layout_width="156px"
+            android:layout_height="156px"
+            app:layout_auto_basewidth="height">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <CheckedTextView
+                android:id="@+id/stateView"
+                android:layout_width="28px"
+                android:layout_height="34px"
+                android:layout_gravity="center"
+                android:background="@drawable/radio_state_style"
+                app:layout_auto_basewidth="height" />
+
+        </com.zhy.autolayout.AutoFrameLayout>
+
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="34px">
+
+            <!--<com.hnzx.hnrb.view.SoundTrackView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:id="@+id/soundTrackView"-->
+            <!--android:layout_width="28px"-->
+            <!--android:layout_height="40px"-->
+            <!--android:visibility="gone"-->
+            <!--app:track_color="#ff763a"-->
+            <!--app:track_num="4" />-->
+
+            <com.hnzx.hnrb.view.PlayView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/mPlayView"
+                android:layout_width="28px"
+                android:layout_height="40px"
+                android:layout_marginRight="10px"
+                android:visibility="gone"
+                app:Background="#ffffff"
+                app:ColColor="#ff763a"
+                app:layout_auto_basewidth="height" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="96px"
+                android:layout_toRightOf="@+id/mPlayView"
+                android:text="习近平：金杯银杯不如百姓的口碑系列"
+                android:textColor="@android:color/black"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:drawableLeft="@drawable/radio_listen_num"
+                android:drawablePadding="8px"
+                android:text="1024"
+                android:textColor="#9b9b9b"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="50px"
+                android:layout_toRightOf="@+id/scan"
+                android:drawableLeft="@drawable/comment_time"
+                android:drawablePadding="8px"
+                android:text="0:55"
+                android:textColor="#9b9b9b"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="9小时前"
+                android:textColor="#9b9b9b"
+                android:textSize="24px" />
+        </com.zhy.autolayout.AutoRelativeLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+</com.zhy.autolayout.AutoLinearLayout>

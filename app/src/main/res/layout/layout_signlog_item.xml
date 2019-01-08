@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#40a4aeb2">
+
+    <RelativeLayout
+        android:id="@+id/itemBg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="14px"
+            android:paddingTop="10px"
+            android:text="12"
+            android:textColor="#303233"
+            android:textSize="32px" />
+
+        <View
+            android:id="@+id/signArrow"
+            android:layout_width="48px"
+            android:layout_height="36px"
+            android:layout_below="@+id/day"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="22px"
+            android:background="@drawable/user_sign_arrow"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/signGlod"
+            android:layout_width="30px"
+            android:layout_height="32px"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:layout_below="@+id/day"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="24px"
+            android:background="@drawable/user_sign_gold"
+            android:button="@null" />
+
+    </RelativeLayout>
+
+</com.zhy.autolayout.AutoFrameLayout>

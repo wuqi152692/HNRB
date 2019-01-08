@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a6000000">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="540px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_modify_sex_bg">
+        <!--<color name="blue">#1768FD</color>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="28px"
+            android:textSize="34px"
+            android:textColor="#1768FD"
+            android:text="性别"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/codeET"
+            android:background="#cbcbcb" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24px"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:paddingBottom="24px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="34px"
+                android:textColor="#1768FD"
+                android:text="男" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/modify_sex_male"
+                android:theme="@style/MyRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <View
+            android:id="@+id/line0"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/codeET"
+            android:background="#cbcbcb" />
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24px"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:paddingBottom="24px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="34px"
+                android:textColor="#1768FD"
+                android:text="女" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/modify_sex_female"
+                android:theme="@style/MyRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+</com.zhy.autolayout.AutoFrameLayout>

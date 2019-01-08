@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/feed_back_headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.hnzx.hnrb.view.TopHeadView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="96px">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_round_gray_border"
+            android:minHeight="280px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/feed_back_currentVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:paddingBottom="18px"
+                android:paddingTop="18px"
+                android:textColor="@android:color/black"
+                android:textSize="30px"
+                tools:text="当前版本1.6.1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="#f2f2f2"></View>
+
+            <EditText
+                android:id="@+id/feed_back_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="300px"
+                android:gravity="top"
+                android:layout_marginBottom="18px"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:layout_marginTop="18px"
+                android:background="@null"
+                android:textColor="#343434"
+                android:textSize="30px"
+                tools:text="发现了一个Bug，请尽快修复" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/feed_back_submit"
+            android:layout_width="match_parent"
+            android:layout_height="76px"
+            android:layout_marginLeft="76px"
+            android:layout_marginRight="76px"
+            android:layout_marginTop="108px"
+            android:background="@drawable/shape_red_radius"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

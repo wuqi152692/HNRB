@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <com.hnzx.hnrb.view.MultiStateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="0px"
+                android:layout_height="80px"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                app:tl_indicator_color="#ff0009"
+                app:tl_indicator_gravity="BOTTOM"
+                app:tl_indicator_height="6px"
+                app:tl_indicator_width_equal_title="true"
+                app:tl_textSelectColor="@android:color/black"
+                app:tl_textUnselectColor="#87847d"
+                app:tl_textsize="14sp" />
+
+            <View
+                android:id="@+id/add"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:background="@drawable/icon_btn_add_more" />
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.hnzx.hnrb.view.MultiStateView>
+
+</com.zhy.autolayout.AutoRelativeLayout>

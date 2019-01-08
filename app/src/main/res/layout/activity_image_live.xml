@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.hnzx.hnrb.ui.live.ImageLiveActivity">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <com.hnzx.hnrb.view.MultiStateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <com.hnzx.hnrb.view.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <include layout="@layout/refresh_head" />
+
+            <com.hnzx.hnrb.view.pulltorefresh.PullableScrollView
+                android:id="@+id/mScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white">
+
+                    <include layout="@layout/layout_image_live_header" />
+
+                    <FrameLayout
+                        android:id="@+id/contentLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/stickyLayout"
+                        android:background="@android:color/white" />
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/stickyLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/headLayout"
+                        android:orientation="vertical"
+                        android:tag="sticky">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="80px"
+                            android:background="@android:color/white"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/hallRB"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:button="@null"
+                                android:checked="true"
+                                android:drawableBottom="@drawable/leader_about_rb_bottom_drawable"
+                                android:drawablePadding="-10px"
+                                android:gravity="center"
+                                android:text="直播大厅"
+                                android:textColor="@color/leader_about_rb_color" />
+
+                            <View
+                                android:layout_width="1px"
+                                android:layout_height="match_parent"
+                                android:background="#E8E8E8" />
+
+                            <RadioButton
+                                android:id="@+id/commentRB"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:button="@null"
+                                android:drawableBottom="@drawable/leader_about_rb_bottom_drawable"
+                                android:drawablePadding="-10px"
+                                android:gravity="center"
+                                android:text="互动评论"
+                                android:textColor="@color/leader_about_rb_color" />
+
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4px"
+                            android:background="#F0F0F0" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white">
+
+                            <CheckBox
+                                android:id="@+id/sort"
+                                android:layout_width="88px"
+                                android:layout_height="30px"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="20px"
+                                android:layout_marginTop="10px"
+                                android:background="@drawable/live_sort_bg"
+                                android:button="@null"
+                                android:checked="true" />
+
+                        </FrameLayout>
+
+                    </com.zhy.autolayout.AutoLinearLayout>
+
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+            </com.hnzx.hnrb.view.pulltorefresh.PullableScrollView>
+
+            <include layout="@layout/load_more" />
+
+        </com.hnzx.hnrb.view.pulltorefresh.PullToRefreshLayout>
+
+        <TextView
+            android:id="@+id/return_top"
+            android:layout_width="88px"
+            android:layout_height="88px"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="60px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/return_top" />
+
+        <TextView
+            android:id="@+id/edit_message"
+            android:layout_width="88px"
+            android:layout_height="88px"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="160px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/edit_message" />
+
+    </com.hnzx.hnrb.view.MultiStateView>
+
+    <include layout="@layout/layout_comment_edit" />
+
+</com.zhy.autolayout.AutoLinearLayout>

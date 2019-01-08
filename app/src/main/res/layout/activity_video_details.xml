@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.hnzx.hnrb.ui.audio.VideoDetailsActivity">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/player"
+        android:layout_width="750px"
+        android:layout_height="422px"
+        app:layout_auto_basewidth="height" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_video_controller"/>
+    </RelativeLayout>
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="750px"-->
+        <!--android:layout_height="422px"-->
+        <!--android:layout_marginTop="26px"-->
+        <!--app:layout_auto_basewidth="height">-->
+
+
+        <!--<com.pili.pldroid.player.widget.PLVideoView-->
+            <!--android:id="@+id/PLVideoView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--/>-->
+
+        <!--<ProgressBar-->
+            <!--android:id="@+id/LoadingView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:layout_gravity="center" />-->
+
+        <!--<include layout="@layout/jc_layout_standard"></include>-->
+
+
+    <!--</RelativeLayout>-->
+
+
+
+    <com.hnzx.hnrb.view.MultiStateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.hnzx.hnrb.view.MultiStateView>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="98px"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        app:layout_auto_basewidth="height">
+
+        <CheckBox
+            android:id="@+id/support"
+            android:layout_width="44px"
+            android:layout_height="44px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="44px"
+            android:background="@drawable/image_support_stytle"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/supportNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26px"
+            android:background="@drawable/image_support_num"
+            android:paddingBottom="2px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:paddingTop="2px"
+            android:text="68"
+            android:textColor="@android:color/white"
+            android:textSize="20px" />
+
+        <CheckBox
+            android:id="@+id/comment"
+            android:layout_width="44px"
+            android:layout_height="44px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="52px"
+            android:background="@drawable/image_comment"
+            android:button="@null" />
+
+        <TextView
+            android:id="@+id/commentNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2px"
+            android:layout_marginTop="26px"
+            android:background="@drawable/image_support_num"
+            android:paddingBottom="2px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:paddingTop="2px"
+            android:text="68"
+            android:textColor="@android:color/white"
+            android:textSize="20px" />
+
+        <CheckBox
+            android:id="@+id/collect"
+            android:layout_width="44px"
+            android:layout_height="44px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="58px"
+            android:background="@drawable/image_collect_stytle"
+            android:button="@null"
+            app:layout_auto_basewidth="height" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

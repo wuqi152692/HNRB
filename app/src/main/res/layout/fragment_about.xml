@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/about_headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.hnzx.hnrb.view.TopHeadView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56px"
+        android:src="@drawable/icon_about_hnrb" />
+
+    <TextView
+        android:id="@+id/about_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:layout_marginTop="44px"
+        android:textColor="#262626"
+        android:autoLink="web"
+        android:textSize="30px"
+        android:lineSpacingExtra="2px"
+        tools:text="《河南日报》创刊于1949年6月1日，是中共河南省委机关报，是河南省最具权威性、指导性的报纸，隶属于河南日报报业集团。\n
+        16个版彩色印刷，发行量为53万份，波及全国，覆盖全省118个县市的每个角落。"
+        android:layout_height="wrap_content" />
+
+</com.zhy.autolayout.AutoLinearLayout>

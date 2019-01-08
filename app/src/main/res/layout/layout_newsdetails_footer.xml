@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_check"
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:background="#f0f0f0"
+        android:gravity="center"
+        android:text="查看更多"
+        android:textColor="#a8a8a8"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54px"
+        android:paddingLeft="26px"
+        android:text="相关新闻"
+        android:textColor="#87847d"
+        android:textSize="30px" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.zhy.autolayout.AutoLinearLayout>

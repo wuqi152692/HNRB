@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mTextViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="34px"
+        android:paddingLeft="26px"
+        android:paddingRight="26px"
+        android:paddingTop="56px"
+        android:textColor="@android:color/black"
+        android:textSize="36px" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mTextViewMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="26px"
+        android:paddingRight="26px"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/mTextViewAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:paddingBottom="12px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="12px"
+        android:text="相关：核污染食品"
+        android:textColor="@android:color/black"
+        android:textSize="30px"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRecyclerViewAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/mTextViewHot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:paddingBottom="12px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="12px"
+        android:text="热门视频"
+        android:textColor="@android:color/black"
+        android:textSize="30px"
+        android:textStyle="bold" />
+
+</com.zhy.autolayout.AutoLinearLayout>

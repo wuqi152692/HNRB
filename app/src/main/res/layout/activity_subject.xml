@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:paddingBottom="32px"
+        android:paddingTop="26px">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:scaleType="center"
+			app:layout_auto_basewidth="height"
+            android:src="@drawable/news_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="专题"
+            android:textColor="#262626"
+            android:textSize="30px" />
+
+        <CheckBox
+            android:id="@+id/collect"
+            android:layout_width="36px"
+            android:layout_height="36px"
+			app:layout_auto_basewidth="height"
+            android:layout_toLeftOf="@+id/share"
+            android:background="@drawable/news_collect"
+            android:button="@null"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/share"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:layout_alignParentRight="true"
+			app:layout_auto_basewidth="height"
+            android:scaleType="center"
+            android:src="@drawable/news_share" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+    <com.hnzx.hnrb.view.MultiStateView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <ExpandableListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:groupIndicator="@null"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="66px"
+            android:background="#f2f2f2"
+            android:gravity="center_vertical"
+			app:layout_auto_basewidth="height"
+            android:paddingLeft="28px"
+            android:textColor="@android:color/black"
+            android:textSize="30px"
+            android:visibility="gone" />
+    </com.hnzx.hnrb.view.MultiStateView>
+
+</com.zhy.autolayout.AutoLinearLayout>

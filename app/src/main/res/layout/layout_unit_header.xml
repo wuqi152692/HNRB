@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="42px"
+        android:layout_marginTop="34px"
+        android:scaleType="centerCrop"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/image"
+        android:layout_toRightOf="@+id/image"
+        android:text="周文郎"
+        android:textColor="@android:color/black"
+        android:textSize="42px" />
+
+    <CheckedTextView
+        android:id="@+id/attention"
+        android:layout_width="wrap_content"
+        android:layout_height="46px"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="28px"
+        android:background="@drawable/unit_subscribe"
+        android:gravity="center"
+        android:paddingLeft="12px"
+        android:paddingRight="12px"
+        android:text="已关注"
+        android:textAlignment="gravity"
+        android:textColor="#424242"
+        android:textSize="20px" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image"
+        android:layout_marginRight="28px"
+        android:layout_toRightOf="@+id/image"
+        android:orientation="horizontal">
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/newsNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="200"
+                android:textColor="@android:color/black"
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文章"
+                android:textColor="#4c4c4c"
+                android:textSize="24px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/viewsNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="200"
+                android:textColor="@android:color/black"
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="阅览"
+                android:textColor="#4c4c4c"
+                android:textSize="24px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/attenteNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="200"
+                android:textColor="@android:color/black"
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/attentes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关注"
+                android:textColor="#4c4c4c"
+                android:textSize="24px" />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginBottom="40px"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_marginTop="60px"
+        android:background="#f8f8f8"
+        android:paddingBottom="40px"
+        android:paddingLeft="32px"
+        android:paddingRight="32px"
+        android:paddingTop="40px"
+        tools:text="从街头烤羊肉串的小贩到体验式报道记者，15年间他与采访对象同吃住、同生活，陪同他们的足迹遍布大江南北。"
+        android:textColor="#4c4c4c"
+        android:textSize="24px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg"
+        android:layout_marginLeft="28px"
+        android:text="动态发布"
+        android:textColor="#87847d"
+        android:textSize="30px" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

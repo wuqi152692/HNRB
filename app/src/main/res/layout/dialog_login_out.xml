@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a6000000">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="540px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/dialog_invited_code_bg">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="90px"
+            android:text="您确定要退出吗？"
+            android:textColor="#030303"
+            android:textSize="34px" />
+
+        <View
+            android:id="@+id/line0"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="64px"
+            android:background="#cbcbcb" />
+
+        <TextView
+            android:id="@+id/cancle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line0"
+            android:layout_toLeftOf="@+id/line1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="26px"
+            android:paddingTop="26px"
+            android:text="再看看"
+            android:textColor="#0076ff"
+            android:textSize="34px" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="1px"
+            android:layout_height="88px"
+            android:layout_below="@+id/line0"
+            android:layout_centerHorizontal="true"
+            android:background="#cbcbcb" />
+
+        <TextView
+            android:id="@+id/sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line0"
+            android:layout_toRightOf="@+id/line1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="26px"
+            android:paddingTop="26px"
+            android:text="回头见"
+            android:textColor="#55000000"
+            android:textSize="34px" />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoFrameLayout>

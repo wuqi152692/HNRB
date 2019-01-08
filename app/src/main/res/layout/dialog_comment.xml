@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pinglunLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10px">
+
+    <EditText
+        android:id="@+id/comment_et"
+        android:layout_width="0px"
+        android:layout_height="60px"
+        android:layout_weight="1"
+        android:background="@drawable/shape_news_details_bottom_edittext"
+        android:hint="添加评论"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        android:textSize="30px" />
+
+    <CheckedTextView
+        android:id="@+id/send"
+        android:layout_width="132px"
+        android:layout_height="60px"
+        android:layout_marginLeft="10px"
+        android:background="@drawable/comment_send_style"
+        android:gravity="center"
+        android:text="发送"
+        android:textAlignment="center"
+        android:textColor="@color/comment_send"
+        android:textSize="30px" />
+
+</LinearLayout>

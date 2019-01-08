@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8f8f8">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/type"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20px"
+        android:src="@drawable/subscribe" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="这里还没有订阅内容"
+        android:textColor="#a4a4a5"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/add_subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/type"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70px"
+        android:background="@drawable/btn_add_subcribe_bg"
+        android:gravity="center"
+        android:text="添加订阅"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_subscribe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40px"
+        android:text="看不到已订阅的？请登录"
+        android:textColor="#a4a4a5"
+        android:textSize="30px"
+        android:visibility="gone" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

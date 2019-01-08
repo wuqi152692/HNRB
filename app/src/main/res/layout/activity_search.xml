@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.hnzx.hnrb.ui.SearchActivity">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout"
+        android:layout_marginBottom="16px"
+        android:layout_marginLeft="16px"
+        android:layout_marginTop="22px"
+        android:layout_toLeftOf="@+id/goSearch"
+        android:background="@drawable/search_et_bg"
+        android:drawableLeft="@drawable/icon_search"
+        android:padding="10px"
+        android:textColor="#7a797b"
+        android:textSize="28px" />
+
+    <TextView
+        android:id="@+id/goSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/editText"
+        android:gravity="center_vertical"
+        android:paddingLeft="24px"
+        android:paddingRight="16px"
+        android:text="搜索"
+        android:textColor="#0076ff"
+        android:textSize="34px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@+id/editText"
+        android:background="#b2b2b2" />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editText" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

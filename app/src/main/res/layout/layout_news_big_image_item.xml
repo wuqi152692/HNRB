@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="22px"
+    android:paddingTop="16px">
+
+    <com.zhy.autolayout.AutoFrameLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="396px"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_morentu_datumoshi"
+            app:layout_auto_basewidth="height" />
+
+        <FrameLayout
+            android:id="@+id/imageBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/image_type_bg"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/itemType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="20px"
+                android:drawableLeft="@drawable/subject_item_type"
+                android:drawablePadding="14px"
+                android:gravity="center_vertical"
+                android:text="专题"
+                android:textColor="@android:color/white"
+                android:textSize="24px" />
+        </FrameLayout>
+
+    </com.zhy.autolayout.AutoFrameLayout>
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="692px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18px"
+        android:letterSpacing="0.02"
+        android:lineSpacingExtra="7px"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        android:textSize="38px"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingLeft="29px"
+        android:paddingRight="29px"
+        android:paddingTop="26px">
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:text="社会"
+            android:textColor="#979797"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/comment_time"
+            android:drawablePadding="8px"
+            android:maxLines="1"
+            android:textColor="#979797"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34px"
+            android:drawableLeft="@drawable/news_looknum"
+            android:drawablePadding="8px"
+            android:maxLines="1"
+            android:textColor="#979797"
+            android:textSize="24px" />
+
+    </LinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

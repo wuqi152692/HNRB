@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.hnzx.hnrb.view.TopHeadView
+        android:id="@+id/person_info_headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.hnzx.hnrb.view.TopHeadView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="222px"
+        android:orientation="horizontal"
+        android:padding="28px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="头像"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <ImageView
+            android:id="@+id/person_info_imageHead"
+            android:layout_width="160px"
+            android:layout_height="160px"
+            android:src="@drawable/icon_default_head"
+            app:layout_auto_basewidth="height" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:id="@+id/person_info_nickNameContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="40px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="昵称"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/person_info_nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="30px"
+            tools:text="章三胖" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:id="@+id/person_info_sexContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="40px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="性别"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/person_info_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="30px"
+            tools:text="男" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:id="@+id/person_info_modifyMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="40px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="手机号"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/person_info_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="30px"
+            tools:text="136****7798" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="28px"
+        android:paddingRight="28px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="邀请码"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/person_info_invitedCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="666666"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/person_info_invitedShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:background="@drawable/personal_info_invited_share"
+            android:padding="10px"
+            android:text="分享"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+    <LinearLayout
+        android:id="@+id/person_info_modifyPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="40px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="40px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="修改密码"
+            android:textColor="@android:color/black"
+            android:textSize="30px" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+
+    <TextView
+        android:id="@+id/person_info_loginOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="40px"
+        android:paddingLeft="28px"
+        android:paddingRight="28px"
+        android:paddingTop="40px"
+        android:text="退出账号"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#f5f5f5" />
+
+
+</LinearLayout>

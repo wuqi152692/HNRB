@@ -1,0 +1,97 @@
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hnzx.hnrb.ui.leftsidebar.LeftMenuFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56px"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="56px"
+        android:text="今日"
+        android:textColor="#2e2e2e"
+        android:textSize="36px" />
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/news_24hours"
+            android:layout_width="0px"
+            android:layout_height="192px"
+            android:layout_weight="1"
+            android:background="@drawable/left_menu_item_style"
+            android:drawableTop="@drawable/news_24hours"
+            android:gravity="center"
+            android:paddingTop="50px"
+            android:text="新闻24小时"
+            android:textColor="#262626"
+            android:textSize="26px"
+            app:layout_auto_basewidth="height" />
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:background="#80d3d3d3"></View>
+
+        <TextView
+            android:id="@+id/hot_push"
+            android:layout_width="0px"
+            android:layout_height="192px"
+            android:layout_weight="1"
+            android:background="@drawable/left_menu_item_style"
+            android:drawableTop="@drawable/hot_push"
+            android:gravity="center"
+            android:paddingTop="50px"
+            android:text="热点推送"
+            android:textColor="#262626"
+            android:textSize="26px"
+            app:layout_auto_basewidth="height" />
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:background="#80d3d3d3"></View>
+
+
+        <TextView
+            android:id="@+id/top_ten"
+            android:layout_width="0px"
+            android:layout_height="192px"
+            android:layout_weight="1"
+            android:background="@drawable/left_menu_item_style"
+            android:drawableTop="@drawable/top_10"
+            android:gravity="center"
+            android:paddingTop="50px"
+            android:text="TOP10"
+            android:textColor="#262626"
+            android:textSize="26px"
+            app:layout_auto_basewidth="height" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50px"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="56px"
+        android:text="栏目"
+        android:textColor="#2e2e2e"
+        android:textSize="36px" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <include layout="@layout/layout_left_menu_item" />
+
+</com.zhy.autolayout.AutoLinearLayout>

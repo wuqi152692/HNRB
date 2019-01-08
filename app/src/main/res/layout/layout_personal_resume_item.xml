@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.zhy.autolayout.AutoFrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="40px"
+        android:paddingRight="24px">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#ebe5e5" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="42px"
+            android:background="@drawable/personal_resume_point" />
+    </com.zhy.autolayout.AutoFrameLayout>
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="40px"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/start_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            tools:text="2015"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/start_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/start_year"
+            android:layout_toRightOf="@+id/start_year"
+            android:textColor="#a5a5a5"
+            android:textSize="20px" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="6px"
+            android:layout_height="2px"
+            android:layout_alignTop="@+id/end_month"
+            android:layout_margin="8px"
+            android:layout_toRightOf="@+id/start_month"
+            android:background="#cacaca" />
+
+        <TextView
+            android:id="@+id/end_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/line"
+            android:textColor="@android:color/black"
+            android:textSize="28px" />
+
+        <TextView
+            android:id="@+id/end_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/start_year"
+            android:layout_toRightOf="@+id/end_year"
+            android:textColor="#a5a5a5"
+            android:textSize="20px" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_year"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="end"
+            android:text="河南省委书记、河南省委书记、河南省委书记、"
+            android:textColor="#404040"
+            android:textSize="32px" />
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

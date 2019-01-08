@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160px"
+    android:layout_height="81px"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="160px"
+        android:layout_height="66px"
+        android:layout_gravity="bottom"
+        android:background="@drawable/channel_item_bg"
+        android:gravity="center"
+        android:text="要闻"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <View
+        android:layout_width="30px"
+        android:layout_height="30px"
+        android:layout_gravity="right"
+        android:background="@drawable/channel_item_del" />
+
+</FrameLayout>

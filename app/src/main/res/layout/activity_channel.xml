@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.hnzx.hnrb.ui.news.ChannelActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@drawable/channel_title_bg"
+        android:gravity="center"
+        android:text="频道"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <View
+        android:id="@+id/close"
+        android:layout_width="30px"
+        android:layout_height="30px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="35px"
+        android:background="@drawable/channel_close" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
+
+
+</com.zhy.autolayout.AutoRelativeLayout>

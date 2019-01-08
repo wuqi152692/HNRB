@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="9px"
+    android:paddingLeft="30px"
+    android:paddingRight="18px"
+    android:paddingTop="9px">
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3-21"
+        android:textColor="#8c9298"
+        android:textSize="25px" />
+
+    <View
+        android:layout_width="4px"
+        android:layout_height="22px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="12px"
+        android:background="#ececec" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="总局系统深入学习贯彻习近平总书记讲话精"
+        android:textColor="@android:color/black"
+        android:textSize="32px"
+        android:textStyle="bold" />
+
+</LinearLayout>

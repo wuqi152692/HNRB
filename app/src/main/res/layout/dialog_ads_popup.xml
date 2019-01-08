@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a6000000">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:id="@+id/layout"
+        android:layout_width="562px"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_update_app_bg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.hnzx.hnrb.view.AutoScrollViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="784px"
+                app:layout_auto_basewidth="height" />
+
+            <com.zhy.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="94px"
+                android:layout_gravity="bottom"
+                android:background="@drawable/home_pager_banner_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_auto_basewidth="height">
+
+                <TextView
+                    android:id="@+id/bannerTitle"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24px"
+                    android:layout_marginRight="20px"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:text="高层动态"
+                    android:textColor="@android:color/white"
+                    android:textSize="36px"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/bannerIndex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10px"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="22px" />
+
+                <TextView
+                    android:id="@+id/bannerLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="#54ffffff"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:id="@+id/bannerTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30px"
+                    android:layout_marginTop="10px"
+                    android:text="1"
+                    android:textColor="#b3ffffff"
+                    android:textSize="22px" />
+
+            </com.zhy.autolayout.AutoLinearLayout>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="54px"
+            android:layout_marginLeft="68px"
+            android:layout_marginRight="68px"
+            android:layout_marginTop="40px"
+            android:background="@drawable/btn_general_style"
+            android:gravity="center_horizontal"
+            android:padding="10px"
+            android:text="了解详情"
+            android:textColor="@android:color/white"
+            android:textSize="26px" />
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="68px"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout"
+        android:layout_marginBottom="-40px"
+        android:layout_marginLeft="-40px"
+        android:layout_toRightOf="@+id/layout"
+        android:src="@drawable/dialog_update_close" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

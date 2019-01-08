@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 切换选中自定义属性-->
+    <declare-styleable name="SwitchTypeButton">
+        <attr name="ThumbDrawable" format="reference" />
+        <attr name="ThumbColor" format="color|reference" />
+        <attr name="ThumbMargin" format="dimension|reference" />
+        <attr name="ThumbMarginTop" format="dimension|reference" />
+        <attr name="ThumbMarginBottom" format="dimension|reference" />
+        <attr name="ThumbMarginLeft" format="dimension|reference" />
+        <attr name="ThumbMarginRight" format="dimension|reference" />
+        <attr name="ThumbWidth" format="dimension|reference" />
+        <attr name="ThumbHeight" format="dimension|reference" />
+        <attr name="ThumbRadius" format="dimension|reference" />
+        <attr name="BackRadius" format="dimension|reference" />
+        <attr name="BackDrawable" format="reference" />
+        <attr name="BackColor" format="color|reference" />
+        <attr name="FadeBack" format="boolean" />
+        <attr name="BackMeasureRatio" format="float" />
+        <attr name="AnimationDuration" format="integer" />
+        <attr name="TintColor" format="color|reference" />
+        <attr name="TextOn" format="string" />
+        <attr name="TextOff" format="string" />
+        <attr name="TextMarginH" format="dimension" />
+        <attr name="AutoAdjustTextPosition" format="boolean" />
+        <attr name="IsSameColor" format="boolean"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="428px"
+        android:scaleType="fitXY"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginBottom="20px"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="28px"
+        android:layout_marginTop="30px"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="#353535"
+        android:textSize="36px" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="28px"
+        android:textColor="#8ba8d3"
+        android:textSize="20px" />
+
+    <TextView
+        android:id="@+id/views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/title"
+        android:layout_marginRight="28px"
+        android:drawableLeft="@drawable/news_looknum"
+        android:textColor="#b7b7b7"
+        android:textSize="20px" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/date"
+        android:layout_marginTop="20px"
+        android:background="#f2f2f2" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:layout_margin="28px"
+        android:textColor="#595959"
+        android:textSize="30px" />
+
+    <com.hnzx.hnrb.view.FlowLayout
+        android:id="@+id/flowLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/msg"
+        android:paddingBottom="30px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        app:horizontal_spacing="18px"
+        app:vertical_spacing="18px" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

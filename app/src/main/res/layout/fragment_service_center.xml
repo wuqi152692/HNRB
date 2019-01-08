@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="vertical">-->
+
+<!--<include layout="@layout/layout_top_liner" />-->
+
+<!--<RadioGroup--><!--android:id="@+id/radioGroup"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:orientation="horizontal">-->
+
+<!--<RadioButton--><!--android:id="@+id/rb0"--><!--android:layout_width="0px"--><!--android:layout_height="80px"--><!--android:layout_weight="1"--><!--android:button="@null"--><!--android:checked="true"--><!--android:drawableBottom="@drawable/service_center_rb_bottom"--><!--android:text="交通"--><!--android:textAlignment="center"--><!--android:textColor="@color/government_rb_color"--><!--android:textSize="30px" />-->
+
+<!--<RadioButton--><!--android:id="@+id/rb1"--><!--android:layout_width="0px"--><!--android:layout_height="80px"--><!--android:layout_weight="1"--><!--android:button="@null"--><!--android:drawableBottom="@drawable/service_center_rb_bottom"--><!--android:text="医疗"--><!--android:textAlignment="center"--><!--android:textColor="@color/government_rb_color"--><!--android:textSize="30px" />-->
+
+<!--<RadioButton--><!--android:id="@+id/rb2"--><!--android:layout_width="0px"--><!--android:layout_height="80px"--><!--android:layout_weight="1"--><!--android:button="@null"--><!--android:drawableBottom="@drawable/service_center_rb_bottom"--><!--android:text="政务"--><!--android:textAlignment="center"--><!--android:textColor="@color/government_rb_color"--><!--android:textSize="30px" />-->
+
+<!--<RadioButton--><!--android:id="@+id/rb3"--><!--android:layout_width="0px"--><!--android:layout_height="80px"--><!--android:layout_weight="1"--><!--android:button="@null"--><!--android:drawableBottom="@drawable/service_center_rb_bottom"--><!--android:text="服务"--><!--android:textAlignment="center"--><!--android:textColor="@color/government_rb_color"--><!--android:textSize="30px" />-->
+
+<!--<RadioButton--><!--android:id="@+id/rb4"--><!--android:layout_width="0px"--><!--android:layout_height="80px"--><!--android:layout_weight="1"--><!--android:button="@null"--><!--android:drawableBottom="@drawable/service_center_rb_bottom"--><!--android:text="气象"--><!--android:textAlignment="center"--><!--android:textColor="@color/government_rb_color"--><!--android:textSize="30px" />-->
+
+<!--</RadioGroup>-->
+
+<com.hnzx.hnrb.view.MultiStateView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/stateView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:msv_emptyView="@layout/layout_empty"
+    app:msv_errorView="@layout/layout_error"
+    app:msv_loadingView="@layout/layout_loading"
+    app:msv_viewState="content">
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</com.hnzx.hnrb.view.MultiStateView>
+
+
+    <!--</com.zhy.autolayout.AutoLinearLayout>-->

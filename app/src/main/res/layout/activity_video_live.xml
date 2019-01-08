@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top_liner" />
+
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/standard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/liveLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:visibility="gone">
+
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/player"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+
+        <FrameLayout
+            android:id="@+id/controlLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="bottom">
+
+            <ImageView
+                android:id="@+id/thumbImageView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+
+            <ImageView
+                android:id="@+id/videoBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="10px"
+                android:scaleType="fitStart"
+                android:src="@drawable/jc_back_normal"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom">
+
+                <CheckBox
+                    android:id="@+id/mediacontroller_play_pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20px"
+                    android:layout_marginRight="10px"
+                    android:background="@null"
+                    android:button="@drawable/play_selector"
+                    android:checked="true" />
+
+                <TextView
+                    android:id="@+id/mediacontroller_time_current"
+                    style="@style/MediaController_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/mediacontroller_play_pause" />
+
+                <TextView
+                    android:id="@+id/mediacontroller_time_total"
+                    style="@style/MediaController_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/mediacontroller_scale" />
+
+                <CheckBox
+                    android:id="@+id/mediacontroller_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20px"
+                    android:background="@drawable/mediacontroller_scale"
+                    android:button="@null" />
+
+                <SeekBar
+                    android:id="@+id/mediacontroller_seekbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/mediacontroller_time_total"
+                    android:layout_toRightOf="@id/mediacontroller_time_current"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:longClickable="false"
+                    android:max="1000"
+                    android:maxHeight="1.0dip"
+                    android:minHeight="1.0dip"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="8dp"
+                    android:progressDrawable="@drawable/jc_bottom_seek_progress"
+                    android:thumb="@drawable/jc_bottom_seek_thumb" />
+            </RelativeLayout>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/video_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_video_pause"
+            android:paddingBottom="22px"
+            android:paddingLeft="28px"
+            android:paddingRight="28px"
+            android:paddingTop="22px"
+            android:text="已暂停"
+            android:textColor="@android:color/white"
+            android:textSize="30px"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/popleNum"
+            android:layout_width="wrap_content"
+            android:layout_height="54px"
+            android:layout_gravity="right"
+            android:background="#98000000"
+            android:gravity="center"
+            android:minWidth="101px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:text="1人"
+            android:textColor="@android:color/white"
+            android:textSize="24px" />
+
+    </FrameLayout>
+
+    <com.hnzx.hnrb.view.MultiStateView
+        android:id="@+id/stateView"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        app:msv_emptyView="@layout/layout_empty"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading"
+        app:msv_viewState="content">
+
+        <com.hnzx.hnrb.view.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <include layout="@layout/refresh_head" />
+
+            <com.hnzx.hnrb.view.pulltorefresh.PullableScrollView
+                android:id="@+id/mScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.zhy.autolayout.AutoRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white">
+
+                    <include layout="@layout/layout_vedio_live_header" />
+
+                    <FrameLayout
+                        android:id="@+id/contentLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/stickyLayout"
+                        android:background="@android:color/white" />
+
+                    <com.zhy.autolayout.AutoLinearLayout
+                        android:id="@+id/stickyLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/headLayout"
+                        android:orientation="vertical"
+                        android:tag="sticky">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="80px"
+                            android:background="@android:color/white"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/hallRB"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:button="@null"
+                                android:checked="true"
+                                android:drawableBottom="@drawable/leader_about_rb_bottom_drawable"
+                                android:drawablePadding="-10px"
+                                android:gravity="center"
+                                android:text="直播大厅"
+                                android:textColor="@color/leader_about_rb_color" />
+
+                            <View
+                                android:layout_width="1px"
+                                android:layout_height="match_parent"
+                                android:background="#E8E8E8" />
+
+                            <RadioButton
+                                android:id="@+id/commentRB"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:button="@null"
+                                android:drawableBottom="@drawable/leader_about_rb_bottom_drawable"
+                                android:drawablePadding="-10px"
+                                android:gravity="center"
+                                android:text="互动评论"
+                                android:textColor="@color/leader_about_rb_color" />
+
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4px"
+                            android:background="#F0F0F0" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white">
+
+                            <CheckBox
+                                android:id="@+id/sort"
+                                android:layout_width="88px"
+                                android:layout_height="30px"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="20px"
+                                android:layout_marginTop="10px"
+                                android:background="@drawable/live_sort_bg"
+                                android:button="@null"
+                                android:checked="true" />
+
+                        </FrameLayout>
+
+                    </com.zhy.autolayout.AutoLinearLayout>
+
+                </com.zhy.autolayout.AutoRelativeLayout>
+
+            </com.hnzx.hnrb.view.pulltorefresh.PullableScrollView>
+
+            <include layout="@layout/load_more" />
+
+        </com.hnzx.hnrb.view.pulltorefresh.PullToRefreshLayout>
+
+        <TextView
+            android:id="@+id/return_top"
+            android:layout_width="88px"
+            android:layout_height="88px"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="60px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/return_top" />
+
+        <TextView
+            android:id="@+id/edit_message"
+            android:layout_width="88px"
+            android:layout_height="88px"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="160px"
+            android:layout_marginRight="30px"
+            android:background="@drawable/edit_message"
+            android:visibility="gone" />
+
+    </com.hnzx.hnrb.view.MultiStateView>
+
+    <include layout="@layout/dialog_comment" />
+
+</com.zhy.autolayout.AutoLinearLayout>

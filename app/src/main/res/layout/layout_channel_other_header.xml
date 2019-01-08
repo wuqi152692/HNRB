@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="26px"
+    android:paddingTop="60px">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="18px"
+        android:text="可选择"
+        android:textColor="@android:color/black"
+        android:textSize="30px" />
+
+    <View
+        android:layout_width="2px"
+        android:layout_height="24px"
+        android:background="#cccccc" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:text="点击频道名称添加"
+        android:textColor="#87847d"
+        android:textSize="28px" />
+
+</com.zhy.autolayout.AutoLinearLayout>

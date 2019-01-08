@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/headLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="100px"
+        android:layout_below="@+id/image"
+        android:gravity="center_vertical"
+        android:paddingLeft="30px"
+        android:text="导语"
+        android:textColor="#87847d"
+        android:textSize="30px"
+        app:layout_auto_basewidth="height" />
+
+    <CheckBox
+        android:id="@+id/showOrHideMsg"
+        android:layout_width="40px"
+        android:layout_height="40px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/image"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/leader_about_msg_btn"
+        android:button="@null"
+        android:checked="true"
+        app:layout_auto_basewidth="height" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_below="@+id/tv1"
+        android:background="#F0F0F0"
+        app:layout_auto_basewidth="height" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv1"
+        android:background="#f6f6f6"
+        android:paddingBottom="60px"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:paddingTop="60px"
+        android:textColor="#6a6a6a"
+        android:textSize="30px"
+        android:visibility="gone" />
+
+</com.zhy.autolayout.AutoRelativeLayout>

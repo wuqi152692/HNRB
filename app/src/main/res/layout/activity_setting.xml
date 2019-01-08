@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <com.hnzx.hnrb.view.TopHeadView
+            android:id="@+id/setting_headView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.hnzx.hnrb.view.TopHeadView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="26px"
+            android:background="#EFEFEF"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="消息推送"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+
+            <com.hnzx.hnrb.view.SwitchTypeButton
+                android:id="@+id/setting_switch_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/white"
+                app:ThumbColor="@android:color/white"
+                app:TintColor="#3DD84C" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="30px"
+            android:background="#f2f2f2"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="昵称提醒"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+            <com.hnzx.hnrb.view.SwitchTypeButton
+                android:id="@+id/setting_switch_nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@android:color/white"
+                app:ThumbColor="@android:color/white"
+                app:TintColor="#3DD84C" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="26px"
+            android:background="#EFEFEF"
+            />
+
+        <LinearLayout
+            android:id="@+id/setting_clean_cache"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="清理缓存"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+            <TextView
+                android:id="@+id/setting_cache_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="34px"
+                tools:text="30.1MB" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="30px"
+            android:background="#f2f2f2"></View>
+
+        <LinearLayout
+            android:id="@+id/setting_feed_back"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="用户反馈"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/government_box_item_arrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="30px"
+            android:background="#f2f2f2"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="当前版本"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+            <TextView
+                android:id="@+id/setting_version_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="34px"
+                tools:text="1.6.1" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="26px"
+            android:background="#EFEFEF"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/setting_about"
+            android:layout_width="match_parent"
+            android:layout_height="88px"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="30px"
+            android:paddingRight="30px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关于"
+                android:textColor="@android:color/black"
+                android:textSize="34px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/government_box_item_arrow" />
+
+        </LinearLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</com.zhy.autolayout.AutoLinearLayout>

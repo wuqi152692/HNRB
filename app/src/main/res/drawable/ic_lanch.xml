@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+    <item
+        android:bottom="12dp"
+        android:drawable="@drawable/icon"
+        android:left="12dp"
+        android:right="12dp"
+        android:top="12dp" />
+</layer-list>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#EFF4FB"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="576px"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_right_menu_bottom"></LinearLayout>
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="576px"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="116px"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/right_menu_scan"
+                android:layout_width="46px"
+                android:layout_height="48px"
+                android:layout_weight="1"
+                android:src="@drawable/icon_right_menu_scan" />
+
+            <View
+                android:layout_width="4px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="30px"
+                android:layout_marginTop="30px"
+                android:background="#e0e0e0" />
+
+            <ImageView
+                android:id="@+id/right_menu_search"
+                android:layout_width="46px"
+                android:layout_height="48px"
+                android:layout_weight="1"
+                android:src="@drawable/icon_right_menu_search" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#e0e0e0"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/right_menu_headView"
+            android:layout_width="176px"
+            android:layout_height="176px"
+            android:layout_marginTop="74px"
+            android:background="@drawable/icon_default_round_head"
+            android:scaleType="fitCenter"
+            app:layout_auto_basewidth="height" />
+
+
+        <TextView
+            android:id="@+id/right_menu_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28px"
+            android:textColor="@android:color/black"
+            android:textSize="48px"
+            tools:text="Brand" />
+
+        <TextView
+            android:id="@+id/right_menu_userStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="66px"
+            android:layout_marginTop="8px"
+            android:textColor="#6f6f6f"
+            android:textSize="24px"
+            android:visibility="invisible"
+            tools:text="未认证" />
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_userScan"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="阅历"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_userTask"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="任务"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_userSign"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="签到"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_collect"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="收藏"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_message"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="消息"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/messageNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/icon_right_menu_red_tips"
+                    android:gravity="center"
+                    android:paddingLeft="6px"
+                    android:paddingRight="6px"
+                    android:textColor="@android:color/white"
+                    android:textSize="20px"
+                    android:visibility="gone" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_activity"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="活动"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_setting"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="设置"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_subject"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="订阅"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+            <com.zhy.autolayout.AutoFrameLayout
+                android:id="@+id/right_menu_invited_code"
+                android:layout_width="0dp"
+                android:layout_height="180px"
+                android:layout_weight="1"
+                android:background="@drawable/shape_right_menu_button">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="邀请码"
+                    android:textColor="@android:color/black"
+                    android:textSize="30px" />
+
+            </com.zhy.autolayout.AutoFrameLayout>
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </com.zhy.autolayout.AutoLinearLayout>
+
+
+</com.zhy.autolayout.AutoFrameLayout>
