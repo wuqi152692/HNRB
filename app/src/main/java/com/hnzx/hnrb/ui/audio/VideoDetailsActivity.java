@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -81,6 +83,7 @@ import fm.jiecao.jcvideoplayer_lib.JCUtils;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
+import static android.view.View.INVISIBLE;
 import static com.hnzx.hnrb.ui.audio.PLVideoViewStandard.DISMISS_CONTROL_VIEW_TIMER;
 import static com.tencent.open.utils.Global.getContext;
 import static fm.jiecao.jcvideoplayer_lib.JCVideoPlayer.WIFI_TIP_DIALOG_SHOWED;
@@ -127,13 +130,15 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     private Runnable DismissControlViewRunnable;
 
     public static final int UPDATE_CSEEK = 1;
+
     private TextView cCurrent,ctotal;
     private SeekBar cSeekBar;
     private ProgressBar loadingView,cbottomProgress;
     private PLVideoView mVideoView;
     private ImageView cthumb,cbackCtiny,cback,cfullscreenButton;
-    private RelativeLayout cVideoController,cVideoLayout;
+    private RelativeLayout cVideoScreen, cVideoController,cVideoLayout;
 
+    private int screen_width, screen_height;
     private boolean isSupport = false;
 
     private boolean isFullScreen = false;
@@ -187,6 +192,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         /**
          * 七牛播放器
          */
+
+        screen_width = getResources().getDisplayMetrics().widthPixels;
+        screen_height = getResources().getDisplayMetrics().heightPixels;
+
+        cVideoScreen = findViewById(R.id.cVideoScreenLayout);
         cVideoLayout = findViewById(R.id.cVideoLayout);
         cVideoController = findViewById(R.id.cVideoController);
         cbottomLinearLayout = findViewById(R.id.layout_cbottom);
@@ -214,7 +224,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         mVideoView.setBufferingIndicator(loadingView);
 
 
-        isOnlyShow();
+        fullScreenToggle();
         setUiWithStateAndScreen(currentState);
         setPlayerEvent();
 
@@ -223,7 +233,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         mVideoView.setOnPreparedListener(new PLOnPreparedListener() {
             @Override
             public void onPrepared(int i) {
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.GONE);
 
                 SeekHandler.sendEmptyMessage(UPDATE_CSEEK);
@@ -282,6 +292,9 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             public void onCompletion() {
                 currentState = CURRENT_STATE_AUTO_COMPLETE;
                 setUiWithStateAndScreen(currentState);
+                Log.d("activitystate", "播放完成");
+
+                CurrentPosition = 0;
             }
         });
 
@@ -497,8 +510,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
                         } else {
 
-
-
                             if (mVideoView.getCurrentPosition()==0 && CurrentPosition==0){
                                 currentState = CURRENT_STATE_PREPARING;
                             } else {
@@ -518,11 +529,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                                 mVideoView.seekTo(CurrentPosition);
                             }
 
-                            Log.d("activitystate", "getCurrentPosition: "+mVideoView.getCurrentPosition());
+                            Log.d("activitystate", "getCurrentPosition: "+CurrentPosition);
                         }
                         Log.d("activitystate", "currentState: "+currentState);
                         setUiWithStateAndScreen(currentState);
-                        
+
                     }
                 });
 
@@ -586,7 +597,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
      */
 
     // 控制器的显示
-    private void isOnlyShow(){
+    private void fullScreenToggle(){
 //        if (!screenState){
 //            ctopLinearLayout.setVisibility(View.GONE);
 //            cbottomLinearLayout.setVisibility(View.GONE);
@@ -606,7 +617,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             changeStartButtonSize((int) getResources().getDimension(R.dimen.jc_start_button_w_h_normal));
         } else if (currentScreen == SCREEN_WINDOW_TINY) {
             cbackCtiny.setVisibility(View.VISIBLE);
-            setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+            setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                     View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
         }
     }
@@ -644,9 +655,10 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case CURRENT_STATE_AUTO_COMPLETE:
                 changeUiToCompleteShow();
-                cancelDismissControlViewHandler();
                 cSeekBar.setProgress(100);
                 cbottomProgress.setProgress(100);
+                cancelDismissControlViewHandler();
+
                 break;
             case CURRENT_STATE_PLAYING_BUFFERING_START:
                 cancelDismissControlViewHandler();
@@ -660,12 +672,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -679,13 +691,14 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
     }
 
-    public void setAllControlsVisible(int topCon, int bottomCon, int startBtn, int loadingPro,
+    public void setAllControlsVisible(int topBac, int topCon, int bottomCon, int startBtn, int loadingPro,
                                       int thumbImg, int coverImg, int bottomPro) {
+        cback.setVisibility(topBac);
         ctopLinearLayout.setVisibility(topCon);
         cbottomLinearLayout.setVisibility(bottomCon);
         start.setVisibility(startBtn);
         loadingView.setVisibility(loadingPro);
-        cback.setVisibility(coverImg);
+
         cbottomProgress.setVisibility(bottomPro);
         cthumb.setVisibility(thumbImg);
     }
@@ -698,12 +711,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -716,11 +729,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_TINY:
@@ -733,11 +746,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.VISIBLE, View.VISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_TINY:
@@ -750,12 +763,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -770,12 +783,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.VISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.VISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -787,18 +800,15 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
     public void startDismissControlViewHandler() {
-//        cancelDismissControlViewHandler();
-        Log.d("startDismissControl", ""+DISMISS_CONTROL_VIEW_HANDLER + " ==  "+DismissControlViewRunnable);
-        if (DISMISS_CONTROL_VIEW_HANDLER!=null){
-            DISMISS_CONTROL_VIEW_HANDLER.removeCallbacks(DismissControlViewRunnable);
-        }
+        cancelDismissControlViewHandler();
         DISMISS_CONTROL_VIEW_HANDLER = new Handler();
         DISMISS_CONTROL_VIEW_HANDLER.postDelayed(DismissControlViewRunnable,2500);
     }
 
     public void cancelDismissControlViewHandler(){
-//        DISMISS_CONTROL_VIEW_HANDLER = new Handler();
-        DISMISS_CONTROL_VIEW_HANDLER.removeCallbacks(DismissControlViewRunnable);
+        if (DISMISS_CONTROL_VIEW_HANDLER!=null){
+            DISMISS_CONTROL_VIEW_HANDLER.removeCallbacks(DismissControlViewRunnable);
+        }
     }
 
 
@@ -807,12 +817,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.VISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -861,12 +871,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.VISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.VISIBLE);
                 updateStartImage();
                 break;
@@ -880,11 +890,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.VISIBLE, View.VISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.VISIBLE, View.VISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_TINY:
@@ -896,12 +906,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
                 updateStartImage();
                 break;
@@ -915,11 +925,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
                 break;
             case SCREEN_WINDOW_TINY:
@@ -932,11 +942,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.INVISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
-                setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE,View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_TINY:
@@ -1138,7 +1148,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                     cbottomLinearLayout.setVisibility(View.INVISIBLE);
                     ctopLinearLayout.setVisibility(View.INVISIBLE);
                     start.setVisibility(View.INVISIBLE);
-                    Log.d("togle", "run: ");
 
                     if (currentScreen != SCREEN_WINDOW_TINY) {
                         cbottomProgress.setVisibility(View.VISIBLE);
@@ -1149,9 +1158,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
         /**
-         *
          * 拖动进度条
-         *
          */
         cSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -1230,6 +1237,9 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
+        /**
+         * 点击seekbar 重置控制器隐藏时间
+         */
         cbottomProgress.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -1247,20 +1257,110 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         });
 
 
-
-
-
+        /**
+         * 点击控制器，Toggle 隐藏<->显示
+         */
         cVideoController.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("click-", "onClick: ");
                 onClickUiToggle();
                 startDismissControlViewHandler();
+            }
+        });
+
+        /**
+         * 点击全屏，UI变化
+         */
+        cfullscreenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentScreen == SCREEN_LAYOUT_NORMAL || currentScreen == SCREEN_LAYOUT_LIST)
+                {
+                    currentScreen = SCREEN_WINDOW_FULLSCREEN;
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    setVideoViewScale(800,800);
+
+                }
+                else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
+                {
+                    currentScreen = SCREEN_LAYOUT_NORMAL;
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                }
+
+                setUiWithStateAndScreen(currentState);
+                fullScreenToggle();
 
             }
         });
 
+
     }
+
+
+    /**
+     *  改变播放器 和 播放器外容器的宽高
+     * @param width
+     * @param height
+     */
+    private void setVideoViewScale(int width,int height)
+    {
+        ViewGroup.LayoutParams layoutParams = mVideoView.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = height;
+        mVideoView.setLayoutParams(layoutParams);
+
+        ViewGroup.LayoutParams layoutParams1 = cVideoScreen.getLayoutParams();
+        layoutParams1.width = width;
+        layoutParams1.height = height;
+        cVideoScreen.setLayoutParams(layoutParams1);
+
+    }
+
+
+
+
+    /**
+     * 监听屏幕方向的改变
+     * @param newConfig
+     */
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        /**
+//         * 当屏幕方向为横屏的时候
+//         */
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+//        {
+//            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+////            Log.d("ViewGroupLayoutParams", "onConfigurationChanged: "+ViewGroup.LayoutParams.MATCH_PARENT);
+//            currentScreen = SCREEN_WINDOW_FULLSCREEN;
+//            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+//            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+////            Log.e("onConfigurationChanged", "onConfigurationChanged: 横屏" );
+//
+//        }
+//        /**
+//         * 当屏幕方向为竖屏的时候
+//         */
+//        else
+//        {
+//            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,422);
+//            currentScreen = SCREEN_LAYOUT_NORMAL;
+//            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+//            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+////            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );
+//
+//        }
+//    }
+
+
+    private int dp2px(int dpValue) {
+        return (int) this.getResources().getDisplayMetrics().density * dpValue;
+    }
+
 
     public boolean isWifi(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -1284,12 +1384,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onStart() {
         super.onStart();
-//        mVideoView.seekTo(CurrentPosition);
-
     }
 
     @Override
     public void onBackPressed() {
+
         if (JCVideoPlayer.backPress()) {
             return;
         }
@@ -1301,9 +1400,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
 
-
         // 记录播放进度
         CurrentPosition = (int) mVideoView.getCurrentPosition();
+
+        Log.d("activitystate", "pause "+CurrentPosition);
+
         // 当被activity被遮挡时，停止播放
         mVideoView.stopPlayback();
 
@@ -1314,7 +1415,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         super.onRestart();
 
         setUiWithStateAndScreen(CURRENT_STATE_NORMAL);
-//        mVideoView.seekTo(CurrentPosition);
+
         mVideoView.setVideoPath(url);
         Log.d("activitystate", "Restart: "+ (CurrentPosition!=0)+ "   "+CurrentPosition);
     }

@@ -11,14 +11,17 @@
     <include layout="@layout/layout_top_liner" />
 
     <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:visibility="gone"
         android:id="@+id/player"
         android:layout_width="750px"
         android:layout_height="422px"
         app:layout_auto_basewidth="height" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/cVideoScreenLayout"
+        android:layout_width="750px"
+        android:layout_height="422px"
+        >
         <include layout="@layout/layout_video_controller"/>
     </RelativeLayout>
 

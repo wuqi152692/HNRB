@@ -2,17 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/black"
-
     android:descendantFocusability="blocksDescendants">
 
 
     <RelativeLayout
         android:id="@+id/cVideoLayout"
         android:layout_width="match_parent"
-        android:layout_height="422px"
-        app:layout_auto_basewidth="height">
+        android:layout_height="match_parent">
         <com.pili.pldroid.player.widget.PLVideoView
             android:id="@+id/PLVideoView"
             android:layout_width="match_parent"
@@ -124,7 +121,6 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="14dp"
                     android:scaleType="centerInside"
-                    android:visibility="invisible"
                     android:src="@drawable/jc_click_back_selector" />
 
                 <TextView
