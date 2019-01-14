@@ -17,18 +17,6 @@
         android:layout_height="422px"
         app:layout_auto_basewidth="height" />
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/ccbb"
-        android:background="#ffff00"
-        android:layout_width="500px"
-        android:layout_height="400px">
-        <TextView
-            android:textSize="14sp"
-            android:text="深刻觉得分开解释的发挥空间啥看法和精神上写毛笔字 v"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/cVideoScreenLayout"

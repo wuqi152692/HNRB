@@ -146,7 +146,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private boolean isFullScreen = false;
 
-    private LinearLayout cbottomLinearLayout, ctopLinearLayout,ccbb;
+    private LinearLayout cbottomLinearLayout, ctopLinearLayout;
 
     private boolean isFirst = true;
     private int currentScreen= 0;
@@ -170,7 +170,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             e.printStackTrace();
         }
 
-        Log.d("activitystate", "initViews:--- ");
 
         ((TextView) findViewById(R.id.title)).setText("视频");
         share = (ImageView) findViewById(R.id.other);
@@ -198,7 +197,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
          * 七牛播放器
          */
 
-        ccbb = findViewById(R.id.ccbb);
 
         screen_width = getResources().getDisplayMetrics().widthPixels;
         screen_height = getResources().getDisplayMetrics().heightPixels;
@@ -1318,21 +1316,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         });
 
 
-        ccbb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.d("setVideoViewScale_", "onClick: "+ ccbb.getWidth());
-
-                ViewGroup.LayoutParams ls = findViewById(R.id.ccbb).getLayoutParams();
-                ls.width = 900;
-                ls.height = 900;
-                findViewById(R.id.ccbb).setLayoutParams(ls);
-
-
-                Log.d("setVideoViewScale_", "onClick: "+ ccbb.getHeight());
-            }
-        });
 
 
     }
