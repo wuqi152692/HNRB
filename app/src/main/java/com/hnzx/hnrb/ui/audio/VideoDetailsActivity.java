@@ -1304,9 +1304,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                     currentScreen = SCREEN_LAYOUT_NORMAL;
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
-
-
                 }
 
                 setUiWithStateAndScreen(currentState);
@@ -1314,8 +1311,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
             }
         });
-
-
 
 
     }
@@ -1328,23 +1323,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void setVideoViewScale(int width,int height)
     {
-//        ViewGroup.LayoutParams layoutParams = mVideoView.getLayoutParams();
-
-
-//        layoutParams.width = width;
-//        layoutParams.height = height;
-//        mVideoView.setLayoutParams(layoutParams);
 
         ViewGroup.LayoutParams layoutParams1 = cVideoScreen.getLayoutParams();
-
-        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1.width);
-        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1);
-        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1.height);
         layoutParams1.width = width;
         layoutParams1.height = height;
         cVideoScreen.setLayoutParams(layoutParams1);
-
-
 
     }
 
@@ -1367,17 +1350,13 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             Log.d("setVideoViewScale", "onConfigurationChanged:  width = "+ screen_width);
             Log.d("setVideoViewScale", "onConfigurationChanged:  height = "+ screen_height);
 
-//            cVideoScreen.bringToFront();
 
-//            stateView.setVisibility(View.GONE);
-//            bottomLayout.setVisibility(View.GONE);
             setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
 
             findViewById(R.id.layout).setVisibility(View.GONE);
-//            mVideoView.setDisplayAspectRatio(PLVideoView.ASPECT_RATIO_PAVED_PARENT);
             getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
             getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
-////            Log.e("onConfigurationChanged", "onConfigurationChanged: 横屏" );
+
 
         }
         else
@@ -1386,7 +1365,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
              * 当屏幕方向为竖屏的时候
              */
             setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(211));
-
+            findViewById(R.id.layout).setVisibility(View.VISIBLE);
             getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
             getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
 //            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );

@@ -27,8 +27,6 @@
         <include layout="@layout/layout_video_controller"/>
     </RelativeLayout>
 
-
-
     <!--<RelativeLayout-->
         <!--android:layout_width="750px"-->
         <!--android:layout_height="422px"-->
