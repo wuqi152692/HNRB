@@ -17,13 +17,28 @@
         android:layout_height="422px"
         app:layout_auto_basewidth="height" />
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ccbb"
+        android:background="#ffff00"
+        android:layout_width="500px"
+        android:layout_height="400px">
+        <TextView
+            android:textSize="14sp"
+            android:text="深刻觉得分开解释的发挥空间啥看法和精神上写毛笔字 v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/cVideoScreenLayout"
-        android:layout_width="750px"
-        android:layout_height="422px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         >
         <include layout="@layout/layout_video_controller"/>
     </RelativeLayout>
+
 
 
     <!--<RelativeLayout-->
@@ -57,6 +72,7 @@
 
 
     <com.hnzx.hnrb.view.MultiStateView
+
         android:id="@+id/stateView"
         android:layout_width="match_parent"
         android:layout_height="0px"
@@ -74,6 +90,7 @@
     </com.hnzx.hnrb.view.MultiStateView>
 
     <com.zhy.autolayout.AutoLinearLayout
+
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="98px"

@@ -75,6 +75,8 @@ import com.pili.pldroid.player.PLOnPreparedListener;
 import com.pili.pldroid.player.PLOnSeekCompleteListener;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.umeng.socialize.UMShareAPI;
+import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.config.AutoLayoutConifg;
 
 import java.util.Timer;
 
@@ -96,6 +98,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     private TextView supportNum, commentNum;
     private RecyclerView mRecyclerViewAbout;
     private MultiStateView stateView;
+    private AutoLinearLayout bottomLayout;
     private XRecyclerView recyclerView;
     private VedioAdapter adapter;
     private VedioAboutAdapter aboutAdapter;
@@ -143,7 +146,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private boolean isFullScreen = false;
 
-    private LinearLayout cbottomLinearLayout, ctopLinearLayout;
+    private LinearLayout cbottomLinearLayout, ctopLinearLayout,ccbb;
 
     private boolean isFirst = true;
     private int currentScreen= 0;
@@ -185,6 +188,8 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         stateView.getView(MultiStateView.VIEW_STATE_EMPTY).findViewById(R.id.reload_data).setOnClickListener(this);
         stateView.getView(MultiStateView.VIEW_STATE_ERROR).findViewById(R.id.error_reload_data).setOnClickListener(this);
 
+        bottomLayout = findViewById(R.id.bottomLayout);
+
         player = (JCVideoPlayerStandard) findViewById(R.id.player);
 
 
@@ -192,6 +197,8 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         /**
          * 七牛播放器
          */
+
+        ccbb = findViewById(R.id.ccbb);
 
         screen_width = getResources().getDisplayMetrics().widthPixels;
         screen_height = getResources().getDisplayMetrics().heightPixels;
@@ -211,6 +218,17 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         cbottomProgress = findViewById(R.id.bottom_cprogress);
         cback = findViewById(R.id.cback);
         start = findViewById(R.id.cstart);
+
+
+        /**
+         *  设置播放器窗口大小
+         */
+        ViewGroup.LayoutParams layoutParams = cVideoScreen.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.height = dp2px(221);
+        cVideoScreen.setLayoutParams(layoutParams);
+
+
 
 
 
@@ -500,6 +518,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 start.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
 
                         if (mVideoView.isPlaying()){
                             currentState = CURRENT_STATE_PAUSE;
@@ -1279,7 +1298,7 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 {
                     currentScreen = SCREEN_WINDOW_FULLSCREEN;
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    setVideoViewScale(800,800);
+
 
                 }
                 else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
@@ -1287,11 +1306,31 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                     currentScreen = SCREEN_LAYOUT_NORMAL;
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+
+
+
                 }
 
                 setUiWithStateAndScreen(currentState);
                 fullScreenToggle();
 
+            }
+        });
+
+
+        ccbb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("setVideoViewScale_", "onClick: "+ ccbb.getWidth());
+
+                ViewGroup.LayoutParams ls = findViewById(R.id.ccbb).getLayoutParams();
+                ls.width = 900;
+                ls.height = 900;
+                findViewById(R.id.ccbb).setLayoutParams(ls);
+
+
+                Log.d("setVideoViewScale_", "onClick: "+ ccbb.getHeight());
             }
         });
 
@@ -1306,15 +1345,23 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void setVideoViewScale(int width,int height)
     {
-        ViewGroup.LayoutParams layoutParams = mVideoView.getLayoutParams();
-        layoutParams.width = width;
-        layoutParams.height = height;
-        mVideoView.setLayoutParams(layoutParams);
+//        ViewGroup.LayoutParams layoutParams = mVideoView.getLayoutParams();
+
+
+//        layoutParams.width = width;
+//        layoutParams.height = height;
+//        mVideoView.setLayoutParams(layoutParams);
 
         ViewGroup.LayoutParams layoutParams1 = cVideoScreen.getLayoutParams();
+
+        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1.width);
+        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1);
+        Log.d("setVideoViewScale", "setVideoViewScale: "+layoutParams1.height);
         layoutParams1.width = width;
         layoutParams1.height = height;
         cVideoScreen.setLayoutParams(layoutParams1);
+
+
 
     }
 
@@ -1325,36 +1372,44 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
      * 监听屏幕方向的改变
      * @param newConfig
      */
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//
-//        /**
-//         * 当屏幕方向为横屏的时候
-//         */
-//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-//        {
-//            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-////            Log.d("ViewGroupLayoutParams", "onConfigurationChanged: "+ViewGroup.LayoutParams.MATCH_PARENT);
-//            currentScreen = SCREEN_WINDOW_FULLSCREEN;
-//            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
-//            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        /**
+         * 当屏幕方向为横屏的时候
+         */
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            Log.d("setVideoViewScale", "onConfigurationChanged:  width = "+ screen_width);
+            Log.d("setVideoViewScale", "onConfigurationChanged:  height = "+ screen_height);
+
+//            cVideoScreen.bringToFront();
+
+//            stateView.setVisibility(View.GONE);
+//            bottomLayout.setVisibility(View.GONE);
+            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+
+            findViewById(R.id.layout).setVisibility(View.GONE);
+//            mVideoView.setDisplayAspectRatio(PLVideoView.ASPECT_RATIO_PAVED_PARENT);
+            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
 ////            Log.e("onConfigurationChanged", "onConfigurationChanged: 横屏" );
-//
-//        }
-//        /**
-//         * 当屏幕方向为竖屏的时候
-//         */
-//        else
-//        {
-//            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,422);
-//            currentScreen = SCREEN_LAYOUT_NORMAL;
-//            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
-//            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
-////            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );
-//
-//        }
-//    }
+
+        }
+        else
+        {
+            /**
+             * 当屏幕方向为竖屏的时候
+             */
+            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(211));
+
+            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+//            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );
+
+        }
+    }
 
 
     private int dp2px(int dpValue) {
@@ -1409,6 +1464,8 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         mVideoView.stopPlayback();
 
     }
+
+
 
     @Override
     protected void onRestart() {
