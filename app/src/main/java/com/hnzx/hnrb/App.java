@@ -57,6 +57,8 @@ import okhttp3.RequestBody;
 
 public class App extends Application {
 
+    // H5新闻标题
+    public String NEWS_LIST_TITLE;
     /**
      * 用户是否已经登陆
      */

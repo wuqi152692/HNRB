@@ -16,11 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hnzx.hnrb.App;
 import com.hnzx.hnrb.R;
 import com.hnzx.hnrb.responsebean.GetFeaturedNewsListRsp;
 import com.hnzx.hnrb.tools.GlideTools;
 import com.hnzx.hnrb.ui.NewsSelect;
 import com.hnzx.hnrb.ui.leftsidebar.ColumnActivity;
+import com.hnzx.hnrb.ui.web.WebActivity;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -148,6 +150,13 @@ public class NewsListAdapter extends BaseAdapter<GetFeaturedNewsListRsp> {
             mHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    // 把H5的新闻标题存储，在详情页获取，并赋值到H5详情页标题
+                    if (relation.is_link == 1){
+                        App.getInstance().NEWS_LIST_TITLE = relation.title;
+                    }
+
+
                     if (isFromRuZhu)
                         NewsSelect.goWhere(mContext, relation.content_id, relation.is_link, relation.link_url, relation.internal_type,
                                 relation.internal_id, relation.content_type, relation.thumb);

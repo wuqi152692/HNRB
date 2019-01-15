@@ -14,6 +14,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.hnzx.hnrb.App;
 import com.hnzx.hnrb.ui.web.WebActivity;
 import com.hnzx.hnrb.view.MultiStateView;
 import com.hnzx.hnrb.view.TopHeadView;
@@ -65,7 +66,7 @@ public class TWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         if (headView != null)
-            headView.setHeadTitle(webView.getTitle());
+            headView.setHeadTitle(App.getInstance().NEWS_LIST_TITLE);
         if (stateView != null) {
             if (stateView.getViewState() != MultiStateView.VIEW_STATE_CONTENT) {
                 AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);

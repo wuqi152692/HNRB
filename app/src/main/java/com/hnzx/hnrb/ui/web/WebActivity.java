@@ -9,10 +9,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 
+import com.hnzx.hnrb.App;
 import com.hnzx.hnrb.R;
 import com.hnzx.hnrb.base.BaseActivity;
 import com.hnzx.hnrb.htmlTools.TDownloadListener;
@@ -33,6 +35,8 @@ public class WebActivity extends BaseActivity {
      * 需要上级页面传递的web url
      */
     private String url;
+
+    private String title;
 
     private boolean isOtherOpen, isAbleShare = true;
 
@@ -78,6 +82,8 @@ public class WebActivity extends BaseActivity {
         headView = (TopHeadView) findViewById(R.id.webview_topHeadView);
         webView = (WebView) findViewById(R.id.webView);
         WebUtil.setWebView(webView, this);
+
+
         webView.setDownloadListener(new TDownloadListener());
         webView.setWebChromeClient(new TWebChromeClient());
         webView.setWebViewClient(new TWebViewClient(this, webView, isOtherOpen, headView));
@@ -85,12 +91,15 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+
         url = getIntent().getStringExtra(WEB_URL_KEY);
         webView.postDelayed(new Runnable() {
 
             @Override
             public void run() {
                 webView.loadUrl(url);
+
             }
         }, 500);
     }
@@ -103,7 +112,14 @@ public class WebActivity extends BaseActivity {
             headView.setTopShareListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog = NewsShareDialog.newInstance(webView.getTitle(), webView.getTitle(), "", webView.getUrl());
+                    if (App.getInstance().NEWS_LIST_TITLE!=""){
+                        title = App.getInstance().NEWS_LIST_TITLE;
+                    } else {
+                        title = webView.getTitle();
+                    }
+
+
+                    dialog = NewsShareDialog.newInstance(title, webView.getTitle(), "", webView.getUrl());
 
                     dialog.show(getFragmentManager(), getLocalClassName());
                 }

@@ -163,7 +163,7 @@ public class NewsSelect {
         if (is_link == 1) {
             // 链接地址错误，则不进行跳转
             if (TextUtils.isEmpty(link_url)) return;
-            con.startActivity(WebActivity.newIntent(con, link_url, false));
+            con.startActivity(WebActivity.newIntent(con, link_url,false));
             return;
         }
         switch (internal_type) {
