@@ -150,7 +150,7 @@ public class NewsListAdapter extends BaseAdapter<GetFeaturedNewsListRsp> {
                 public void onClick(View v) {
                     if (isFromRuZhu)
                         NewsSelect.goWhere(mContext, relation.content_id, relation.is_link, relation.link_url, relation.internal_type,
-                                relation.internal_id, relation.content_type, relation.thumb, true);
+                                relation.internal_id, relation.content_type, relation.thumb);
                     else {
                         Log.d("relations", "onClick:  ---------------    "+relation.content_id);
                         NewsSelect.goWhere(mContext, relation.content_id, relation.is_link, relation.link_url, relation.internal_type,

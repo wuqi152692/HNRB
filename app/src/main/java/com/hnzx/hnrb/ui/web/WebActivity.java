@@ -44,7 +44,7 @@ public class WebActivity extends BaseActivity {
 
     private TopHeadView headView;
 
-    public static Intent newIntent(Context context, String url, boolean isOtherOpen) {
+    public static Intent newIntent(Context context, String url,  boolean isOtherOpen) {
         Intent intent = new Intent(context, WebActivity.class);
         intent.putExtra(BUNDLE_KEY_IS_OTHER_OPEN, isOtherOpen);
         intent.putExtra(WEB_URL_KEY, url);

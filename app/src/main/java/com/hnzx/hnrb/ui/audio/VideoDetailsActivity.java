@@ -219,6 +219,9 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
         /**
+         *  AutoLayout布局中，若控件在XML中设置固定数值，则无法动态改变大小（我没找到方法），
+         *  所以设置成match_parent，在initView中重新设置大小
+         *
          *  设置播放器窗口大小
          */
         ViewGroup.LayoutParams layoutParams = cVideoScreen.getLayoutParams();
@@ -268,7 +271,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                         currentState = CURRENT_STATE_PLAYING;
                         changeUiToPlayingClear();
                         Log.d("activitystate", "currentState: "+currentState);
-
                         break;
 
                     case MEDIA_INFO_BUFFERING_START:
@@ -1227,30 +1229,19 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 //            }
 //        });
 
-        // 推出全屏
+
+        // 退出全屏
         cback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("cback", "onClick: ");
+                // 返回到详情页，屏幕变为小窗口
+                currentScreen = SCREEN_WINDOW_FULLSCREEN;
+                screenToggle();
             }
         });
 
 
-//        cSeekBar.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        cancelDismissControlViewHandler();
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        Log.d("click-", "onTouch:--- ");
-//                        startDismissControlViewHandler();
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
 
 
 
@@ -1292,28 +1283,35 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         cfullscreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentScreen == SCREEN_LAYOUT_NORMAL || currentScreen == SCREEN_LAYOUT_LIST)
-                {
-                    currentScreen = SCREEN_WINDOW_FULLSCREEN;
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-                }
-                else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
-                {
-                    currentScreen = SCREEN_LAYOUT_NORMAL;
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                }
-
-                setUiWithStateAndScreen(currentState);
-                fullScreenToggle();
-
+                screenToggle();
             }
         });
-
-
     }
+
+
+
+    /**
+     *  播放器窗口UI 全屏变换
+     */
+    private void screenToggle(){
+        if (currentScreen == SCREEN_LAYOUT_NORMAL || currentScreen == SCREEN_LAYOUT_LIST)
+        {
+            currentScreen = SCREEN_WINDOW_FULLSCREEN;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
+        }
+        else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
+        {
+            currentScreen = SCREEN_LAYOUT_NORMAL;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        }
+
+        setUiWithStateAndScreen(currentState);
+        fullScreenToggle();
+    }
+
 
 
     /**

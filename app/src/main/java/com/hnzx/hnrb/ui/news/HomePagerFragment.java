@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,7 +208,6 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
 
     private void GetHomeData() {
         GetHomePagerDataReq req = new GetHomePagerDataReq();
-
         App.getInstance().requestJsonDataGet(req, new homeListener(), new errorListener(true));
     }
 

@@ -117,9 +117,10 @@
 
                 <ImageView
                     android:id="@+id/cback"
-                    android:layout_width="23dp"
+                    android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:paddingLeft="14dp"
+                    android:paddingRight="16dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/jc_click_back_selector" />
 
