@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatTextView;
@@ -153,6 +155,31 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     private int currentState = 0;
 
 
+    protected boolean mTouchingProgressBar;
+    protected float mDownX;
+    protected float mDownY;
+    protected boolean mChangeVolume;
+    protected boolean mChangePosition;
+    protected boolean mChangeBrightness;
+    protected int mGestureDownPosition;
+    protected int mGestureDownVolume;
+    protected float mGestureDownBrightness;
+    protected int mSeekTimePosition;
+
+    protected int mScreenWidth;
+    protected int mScreenHeight;
+    protected AudioManager mAudioManager;
+
+    public static final int THRESHOLD = 80;
+
+    private Context context;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = this;
+    }
 
     @Override
     protected int getLayoutId() {
@@ -197,9 +224,10 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
          * 七牛播放器
          */
 
+        mScreenWidth = getResources().getDisplayMetrics().widthPixels;
+        mScreenHeight = getResources().getDisplayMetrics().heightPixels;
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        screen_width = getResources().getDisplayMetrics().widthPixels;
-        screen_height = getResources().getDisplayMetrics().heightPixels;
 
         cVideoScreen = findViewById(R.id.cVideoScreenLayout);
         cVideoLayout = findViewById(R.id.cVideoLayout);
@@ -987,9 +1015,9 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     /**
      * 手势滑动，控制播放进度
      * @param deltaX
-     * @param seekTime
+     * @param seekTime  当前时间
      * @param seekTimePosition
-     * @param totalTime
+     * @param totalTime  总时间
      * @param totalTimeDuration
      */
     protected Dialog mProgressDialog;
@@ -1000,12 +1028,12 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     public void showProgressDialog(float deltaX, String seekTime, int seekTimePosition, String totalTime, int totalTimeDuration) {
 
         if (mProgressDialog == null) {
-            View localView = LayoutInflater.from(getContext()).inflate(R.layout.jc_dialog_progress, null);
+            View localView = LayoutInflater.from(context).inflate(R.layout.jc_dialog_progress, null);
             mDialogProgressBar = ((ProgressBar) localView.findViewById(R.id.duration_progressbar));
             mDialogSeekTime = ((TextView) localView.findViewById(R.id.tv_current));
             mDialogTotalTime = ((TextView) localView.findViewById(R.id.tv_duration));
             mDialogIcon = ((ImageView) localView.findViewById(R.id.duration_image_tip));
-            mProgressDialog = new Dialog(getContext(), R.style.jc_style_dialog_progress);
+            mProgressDialog = new Dialog(context, R.style.jc_style_dialog_progress);
             mProgressDialog.setContentView(localView);
             mProgressDialog.getWindow().addFlags(Window.FEATURE_ACTION_BAR);
             mProgressDialog.getWindow().addFlags(32);
@@ -1029,6 +1057,13 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         }
         onCLickUiToggleToClear();
     }
+
+    public void dismissProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
 
     public void onCLickUiToggleToClear() {
         if (currentState == CURRENT_STATE_PREPARING) {
@@ -1060,6 +1095,98 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
 
+
+
+    /**
+     *  手势声音调节
+     * @param deltaY
+     * @param volumePercent
+     */
+    protected Dialog mVolumeDialog;
+    protected ProgressBar mDialogVolumeProgressBar;
+    protected TextView mDialogVolumeTextView;
+    protected ImageView mDialogVolumeImageView;
+    public void showVolumeDialog(float deltaY, int volumePercent) {
+        if (mVolumeDialog == null) {
+            View localView = LayoutInflater.from(context).inflate(R.layout.jc_dialog_volume, null);
+            mDialogVolumeImageView = ((ImageView) localView.findViewById(R.id.volume_image_tip));
+            mDialogVolumeTextView = ((TextView) localView.findViewById(R.id.tv_volume));
+            mDialogVolumeProgressBar = ((ProgressBar) localView.findViewById(R.id.volume_progressbar));
+            mVolumeDialog = new Dialog(context, R.style.jc_style_dialog_progress);
+            mVolumeDialog.setContentView(localView);
+            mVolumeDialog.getWindow().addFlags(8);
+            mVolumeDialog.getWindow().addFlags(32);
+            mVolumeDialog.getWindow().addFlags(16);
+            mVolumeDialog.getWindow().setLayout(-2, -2);
+            WindowManager.LayoutParams localLayoutParams = mVolumeDialog.getWindow().getAttributes();
+            localLayoutParams.gravity = Gravity.CENTER;
+            mVolumeDialog.getWindow().setAttributes(localLayoutParams);
+        }
+        if (!mVolumeDialog.isShowing()) {
+            mVolumeDialog.show();
+        }
+        if (volumePercent <= 0) {
+            mDialogVolumeImageView.setBackgroundResource(R.drawable.jc_close_volume);
+        } else {
+            mDialogVolumeImageView.setBackgroundResource(R.drawable.jc_add_volume);
+        }
+        if (volumePercent > 100) {
+            volumePercent = 100;
+        } else if (volumePercent < 0) {
+            volumePercent = 0;
+        }
+        mDialogVolumeTextView.setText(volumePercent + "%");
+        mDialogVolumeProgressBar.setProgress(volumePercent);
+        onCLickUiToggleToClear();
+    }
+
+    public void dismissVolumeDialog() {
+        if (mVolumeDialog != null) {
+            mVolumeDialog.dismiss();
+        }
+    }
+
+
+    /**
+     * 亮度调节
+     * @param brightnessPercent
+     */
+    protected Dialog mBrightnessDialog;
+    protected ProgressBar mDialogBrightnessProgressBar;
+    protected TextView mDialogBrightnessTextView;
+    public void showBrightnessDialog(int brightnessPercent) {
+        if (mBrightnessDialog == null) {
+            View localView = LayoutInflater.from(context).inflate(R.layout.jc_dialog_brightness, null);
+            mDialogBrightnessTextView = ((TextView) localView.findViewById(R.id.tv_brightness));
+            mDialogBrightnessProgressBar = ((ProgressBar) localView.findViewById(R.id.brightness_progressbar));
+            mBrightnessDialog = new Dialog(context, R.style.jc_style_dialog_progress);
+            mBrightnessDialog.setContentView(localView);
+            mBrightnessDialog.getWindow().addFlags(Window.FEATURE_ACTION_BAR);
+            mBrightnessDialog.getWindow().addFlags(32);
+            mBrightnessDialog.getWindow().addFlags(16);
+            mBrightnessDialog.getWindow().setLayout(-2, -2);
+            WindowManager.LayoutParams localLayoutParams = mBrightnessDialog.getWindow().getAttributes();
+            localLayoutParams.gravity = Gravity.CENTER;
+            mBrightnessDialog.getWindow().setAttributes(localLayoutParams);
+        }
+        if (!mBrightnessDialog.isShowing()) {
+            mBrightnessDialog.show();
+        }
+        if (brightnessPercent > 100) {
+            brightnessPercent = 100;
+        } else if (brightnessPercent < 0) {
+            brightnessPercent = 0;
+        }
+        mDialogBrightnessTextView.setText(brightnessPercent + "%");
+        mDialogBrightnessProgressBar.setProgress(brightnessPercent);
+        onCLickUiToggleToClear();
+    }
+
+    public void dismissBrightnessDialog() {
+        if (mBrightnessDialog != null) {
+            mBrightnessDialog.dismiss();
+        }
+    }
 
 //    public void showWifiDialog() {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -1100,6 +1227,25 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 //        mVideoView.start();
 //    }
 
+
+    /**
+     * 转换时间格式
+     */
+    private String timeFormat(int millisecond){
+        int second = millisecond/1000;
+        int hh = second/3600;
+        int mm = second%3600/60;
+        int ss = second%60;
+        String str = null;
+        if (hh!=0){
+            str = String.format("%02d:%02d:%02d",hh,mm,ss);
+        }
+        else
+        {
+            str = String.format("%02d:%02d",mm,ss);
+        }
+        return str;
+    }
 
     /**
      *
@@ -1148,6 +1294,112 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         }
     };
+
+
+
+
+
+
+    /**
+     * 获取视频进度
+     * @return
+     */
+    public int getCurrentPositionWhenPlaying() {
+        int position = 0;
+        if (mVideoView == null)
+            return position;//这行代码不应该在这，如果代码和逻辑万无一失的话，心头之恨呐
+        if (currentState == CURRENT_STATE_PLAYING ||
+                currentState == CURRENT_STATE_PAUSE ||
+                currentState == CURRENT_STATE_PLAYING_BUFFERING_START) {
+            try {
+                position = (int) mVideoView.getCurrentPosition();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return position;
+            }
+        }
+        return position;
+    }
+
+
+
+    /**
+     *  播放器窗口UI 全屏变换
+     */
+    private void screenToggle(){
+        if (currentScreen == SCREEN_LAYOUT_NORMAL || currentScreen == SCREEN_LAYOUT_LIST)
+        {
+            currentScreen = SCREEN_WINDOW_FULLSCREEN;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
+        }
+        else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
+        {
+            currentScreen = SCREEN_LAYOUT_NORMAL;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        }
+
+        setUiWithStateAndScreen(currentState);
+        fullScreenToggle();
+    }
+
+
+
+    /**
+     *  改变播放器 和 播放器外容器的宽高
+     * @param width
+     * @param height
+     */
+    private void setVideoViewScale(int width,int height)
+    {
+
+        ViewGroup.LayoutParams layoutParams1 = cVideoScreen.getLayoutParams();
+        layoutParams1.width = width;
+        layoutParams1.height = height;
+        cVideoScreen.setLayoutParams(layoutParams1);
+
+    }
+
+
+
+
+    /**
+     * 监听屏幕方向的改变
+     * @param newConfig
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        /**
+         * 当屏幕方向为横屏的时候
+         */
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+
+            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+
+            findViewById(R.id.layout).setVisibility(View.GONE);
+            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+
+
+        }
+        else
+        {
+            /**
+             * 当屏幕方向为竖屏的时候
+             */
+            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(211));
+            findViewById(R.id.layout).setVisibility(View.VISIBLE);
+            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
+            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
+//            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );
+
+        }
+    }
 
 
 
@@ -1208,28 +1460,6 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
 
 
 
-
-//        cthumb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (TextUtils.isEmpty(url)) {
-//                    Toast.makeText(getContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (currentState == CURRENT_STATE_NORMAL) {
-////                    if (!url.startsWith("file") && !url.startsWith("/") && !isWifi(getContext()) && !WIFI_TIP_DIALOG_SHOWED) {
-//                    if (!url.startsWith("file") && !url.startsWith("/")){
-////                    showWifiDialog();
-//                        return;
-//                    }
-////                startVideo();
-//                } else if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
-//                    onClickUiToggle();
-//                }
-//            }
-//        });
-
-
         // 退出全屏
         cback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1265,17 +1495,158 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
         });
 
 
+
+
+        cVideoController.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float x = event.getX();
+                float y = event.getY();
+
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        Log.d("cthumbz", "down");
+                        mTouchingProgressBar = true;
+
+                        mDownX = x;
+                        mDownY = y;
+                        mChangeVolume = false;
+                        mChangePosition = false;
+                        mChangeBrightness = false;
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        Log.d("cthumbz", "move");
+
+                        float deltaX = x - mDownX;
+                        float deltaY = y - mDownY;
+                        float absDeltaX = Math.abs(deltaX);
+                        float absDeltaY = Math.abs(deltaY);
+
+                        if (currentScreen==SCREEN_WINDOW_FULLSCREEN){
+
+                            if (!mChangePosition && !mChangeVolume && !mChangeBrightness) {
+                                if (absDeltaX > THRESHOLD || absDeltaY > THRESHOLD) {
+                                    cancelDismissControlViewHandler();
+                                    if (absDeltaX >= THRESHOLD) {
+                                        // 全屏模式下的CURRENT_STATE_ERROR状态下,不响应进度拖动事件.
+                                        // 否则会因为mediaplayer的状态非法导致App Crash
+                                        if (currentState != CURRENT_STATE_ERROR) {
+                                            mChangePosition = true;
+                                            mGestureDownPosition = getCurrentPositionWhenPlaying();
+                                        }
+                                    } else {
+                                        //如果y轴滑动距离超过设置的处理范围，那么进行滑动事件处理
+                                        if (mDownX < mScreenWidth * 0.5f) {//左侧改变亮度
+                                            mChangeBrightness = true;
+                                            WindowManager.LayoutParams lp = getWindow().getAttributes();
+                                            if (lp.screenBrightness < 0) {
+                                                try {
+                                                    mGestureDownBrightness = Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
+
+                                                } catch (Settings.SettingNotFoundException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            } else {
+                                                mGestureDownBrightness = lp.screenBrightness * 255;
+                                            }
+                                        } else {//右侧改变声音
+                                            mChangeVolume = true;
+                                            mGestureDownVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (mChangePosition) {
+                            int totalTimeDuration = (int) mVideoView.getDuration();
+                            mSeekTimePosition = (int) (mGestureDownPosition + deltaX * totalTimeDuration / mScreenWidth);
+                            if (mSeekTimePosition > totalTimeDuration)
+                                mSeekTimePosition = totalTimeDuration;
+                            else if (mSeekTimePosition < 0)
+                                mSeekTimePosition = 0;
+                            String seekTime = timeFormat(mSeekTimePosition);
+                            String totalTime = timeFormat(totalTimeDuration);
+
+                            showProgressDialog(deltaX, seekTime, mSeekTimePosition, totalTime, totalTimeDuration);
+                        }
+
+                        if (mChangeVolume) {
+                            deltaY = -deltaY;
+                            int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                            int deltaV = (int) (max * deltaY * 3 / mScreenHeight);
+                            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mGestureDownVolume + deltaV, 0);
+                            //dialog中显示百分比
+                            int volumePercent = (int) (mGestureDownVolume * 100 / max + deltaY * 3 * 100 / mScreenHeight);
+                            showVolumeDialog(-deltaY, volumePercent);
+                        }
+
+                        if (mChangeBrightness) {
+                            deltaY = -deltaY;
+                            int deltaV = (int) (255 * deltaY * 3 / mScreenHeight);
+                            WindowManager.LayoutParams params = getWindow().getAttributes();
+                            if (((mGestureDownBrightness + deltaV) / 255) >= 1) {//这和声音有区别，必须自己过滤一下负值
+                                params.screenBrightness = 1;
+                            } else if (((mGestureDownBrightness + deltaV) / 255) <= 0) {
+                                params.screenBrightness = 0.01f;
+                            } else {
+                                params.screenBrightness = (mGestureDownBrightness + deltaV) / 255;
+                            }
+                            getWindow().setAttributes(params);
+                            //dialog中显示百分比
+                            int brightnessPercent = (int) (mGestureDownBrightness * 100 / 255 + deltaY * 3 * 100 / mScreenHeight);
+                            showBrightnessDialog(brightnessPercent);
+//                        mDownY = y;
+                        }
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        Log.d("cthumbz", "up");
+//
+
+                        mTouchingProgressBar = false;
+                        dismissProgressDialog();
+                        dismissVolumeDialog();
+                        dismissBrightnessDialog();
+                        if (mChangePosition) {
+
+                            mVideoView.seekTo(mSeekTimePosition);
+                            int duration = (int) mVideoView.getDuration();
+                            int progress = mSeekTimePosition * 100 / (duration == 0 ? 1 : duration);
+                            cbottomProgress.setProgress(progress);
+                        }
+                        if (mChangeVolume) {
+
+                        }
+
+
+                        if (!mChangeBrightness&&!mChangePosition&&!mChangeVolume){
+                            startDismissControlViewHandler();
+                            onClickUiToggle();
+                        }
+
+
+
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+
         /**
          * 点击控制器，Toggle 隐藏<->显示
          */
         cVideoController.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("click-", "onClick: ");
                 onClickUiToggle();
                 startDismissControlViewHandler();
             }
         });
+
 
         /**
          * 点击全屏，UI变化
@@ -1286,90 +1657,11 @@ public class VideoDetailsActivity extends BaseActivity implements View.OnClickLi
                 screenToggle();
             }
         });
-    }
-
-
-
-    /**
-     *  播放器窗口UI 全屏变换
-     */
-    private void screenToggle(){
-        if (currentScreen == SCREEN_LAYOUT_NORMAL || currentScreen == SCREEN_LAYOUT_LIST)
-        {
-            currentScreen = SCREEN_WINDOW_FULLSCREEN;
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-        }
-        else if (currentScreen == SCREEN_WINDOW_FULLSCREEN)
-        {
-            currentScreen = SCREEN_LAYOUT_NORMAL;
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        }
-
-        setUiWithStateAndScreen(currentState);
-        fullScreenToggle();
-    }
-
-
-
-    /**
-     *  改变播放器 和 播放器外容器的宽高
-     * @param width
-     * @param height
-     */
-    private void setVideoViewScale(int width,int height)
-    {
-
-        ViewGroup.LayoutParams layoutParams1 = cVideoScreen.getLayoutParams();
-        layoutParams1.width = width;
-        layoutParams1.height = height;
-        cVideoScreen.setLayoutParams(layoutParams1);
 
     }
 
 
 
-
-    /**
-     * 监听屏幕方向的改变
-     * @param newConfig
-     */
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        /**
-         * 当屏幕方向为横屏的时候
-         */
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-            Log.d("setVideoViewScale", "onConfigurationChanged:  width = "+ screen_width);
-            Log.d("setVideoViewScale", "onConfigurationChanged:  height = "+ screen_height);
-
-
-            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-
-            findViewById(R.id.layout).setVisibility(View.GONE);
-            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
-            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
-
-
-        }
-        else
-        {
-            /**
-             * 当屏幕方向为竖屏的时候
-             */
-            setVideoViewScale(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(211));
-            findViewById(R.id.layout).setVisibility(View.VISIBLE);
-            getWindow().clearFlags((WindowManager.LayoutParams.FLAG_FULLSCREEN));
-            getWindow().addFlags((WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN));
-//            Log.e("onConfigurationChanged", "onConfigurationChanged: 竖屏" );
-
-        }
-    }
 
 
     private int dp2px(int dpValue) {
