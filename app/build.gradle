@@ -108,6 +108,9 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
+    implementation 'com.qiniu:happy-dns:0.2.13'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
     implementation project(path: ':vitam')
     implementation project(path: ':jcvideoplayer')
 //    implementation 'com.github.open-android:JieCaoVideoPlayer:0.1.0'   //------ 节操播放器
@@ -118,8 +121,8 @@ dependencies {
     implementation 'com.zhy:autolayout:1.4.5'
     implementation 'com.alibaba:fastjson:1.2.12'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
-    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
-    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.11.0'
     implementation 'com.j256.ormlite:ormlite-android:4.48'
     implementation 'com.j256.ormlite:ormlite-core:4.48'
     implementation 'org.jsoup:jsoup:1.9.2'
