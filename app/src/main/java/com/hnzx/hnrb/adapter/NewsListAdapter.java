@@ -53,9 +53,9 @@ public class NewsListAdapter extends BaseAdapter<GetFeaturedNewsListRsp> {
     public int getItemViewType(int position) {
 
 
-        if (getItem(position).title.startsWith("王国生")){
-            return 3;
-        }
+//        if (getItem(position).title.startsWith("王国生")){
+//            return 3;
+//        }
         return itemType;
     }
 

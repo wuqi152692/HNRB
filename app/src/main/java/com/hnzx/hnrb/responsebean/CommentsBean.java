@@ -33,4 +33,5 @@ public class CommentsBean {
     public boolean isSupport;
     public String type;
     public String position;
+    public String video;
 }

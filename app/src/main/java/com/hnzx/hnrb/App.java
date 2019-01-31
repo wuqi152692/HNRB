@@ -198,14 +198,14 @@ public class App extends Application {
             builder.addFormDataPart("id", id);
         if (topic_id != null && topic_id.length() > 0)
             builder.addFormDataPart("topic_id", topic_id);
-        if (files != null && files.size() > 0) {
+        if(videoName!=null && videoName.length()>0){
+            builder.addFormDataPart("video",videoName);
+        }else if (files != null && files.size() > 0) {
             for (File file : files) {
                 builder.addFormDataPart("imgs[]", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
             }
         }
-        if(videoName!=null && videoName.length()>0){
-            builder.addFormDataPart("video",videoName);
-        }
+
         if (content != null && content.length() > 0)
             builder.addFormDataPart("content", content);
 

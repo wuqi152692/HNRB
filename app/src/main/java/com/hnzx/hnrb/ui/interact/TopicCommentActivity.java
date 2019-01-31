@@ -142,7 +142,7 @@ public class TopicCommentActivity extends BaseActivity implements View.OnClickLi
                     if (media != null && media.getPath() != null)
                         files.add(new File(media.getPath()));
                 }
-                if (TextUtils.isEmpty(editText.getText()) && files.size() <= 0) {
+                if (TextUtils.isEmpty(editText.getText())) {
                     showTopToast("评论内容为空", true);
                     return;
                 } else upLoadPublishMessage(editText.getText().toString());

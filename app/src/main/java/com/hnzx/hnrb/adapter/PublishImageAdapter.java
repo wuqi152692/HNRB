@@ -51,6 +51,7 @@ public class PublishImageAdapter extends BaseAdapter<LocalMedia> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == IMAGE_TYPE) {
             ViewHolder mHolder = (ViewHolder) holder;
+            mHolder.mVideoIcon.setVisibility(getItem(position).getPictureType().startsWith("video/") ? View.VISIBLE : View.GONE);
             GlideTools.Glide(mContext, getItem(position).getPath(), mHolder.image, R.drawable.bg_morentu_xiaotumoshi);
             mHolder.del.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +74,7 @@ public class PublishImageAdapter extends BaseAdapter<LocalMedia> {
                         @Override
                         public void isPermissionOn() {
                             PictureSelector.create((Activity) context)
-                                    .openGallery(isTypeAll && (position == 0 || getItem(0).getPictureType().contains("image/")) ? PictureMimeType.ofAll() : PictureMimeType.ofImage())
+                                    .openGallery(isTypeAll && position == 0 ? PictureMimeType.ofAll() : PictureMimeType.ofImage())
                                     .selectionMode(PictureConfig.SINGLE)
                                     .previewImage(true)
                                     .previewVideo(true)
@@ -102,13 +103,14 @@ public class PublishImageAdapter extends BaseAdapter<LocalMedia> {
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView image;
+        private ImageView image, mVideoIcon;
         private View del;
 
         public ViewHolder(View itemView) {
             super(itemView);
             AutoUtils.auto(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
+            mVideoIcon = itemView.findViewById(R.id.mVideoIcon);
             del = itemView.findViewById(R.id.del);
         }
     }

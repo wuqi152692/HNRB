@@ -167,6 +167,8 @@
         <!-- 话题详情 -->
         <activity
             android:name=".ui.interact.TopicDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <!-- 活动详情 -->
         <activity

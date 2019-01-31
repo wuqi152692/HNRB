@@ -76,6 +76,17 @@ public class GlideTools {
     }
 
     /**
+     * 正常加载(fitCenter)
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void GlideFit(Context context, String url, ImageView imageView, int type) {
+        GlideApp.with(context).load(url).placeholder(type).fitCenter().into(imageView);
+    }
+
+    /**
      * 加载圆形图片(支持)
      *
      * @param context

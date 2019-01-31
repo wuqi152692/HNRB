@@ -41,6 +41,9 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.util.List;
 import java.util.Map;
 
+import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+
 public class TopicDetailActivity extends BaseActivity implements View.OnClickListener {
     public static final String DATA_KEY = "datakey";
     private MultiStateView stateView;
@@ -262,5 +265,29 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress())
+            return;
+        else super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        playerPause();
+    }
+
+    private void playerPause() {
+        try {
+            if (JCMediaManager.instance().mediaPlayer.isPlaying()) {
+                JCMediaManager.instance().mediaPlayer.pause();
+                JCVideoPlayer.backPress();
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
     }
 }
