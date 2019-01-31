@@ -1,1 +1,1 @@
-include ':app', ':jcvideoplayer', ':xrecyclerview', ":vitam"
+include ':app', ':jcvideoplayer', ':xrecyclerview', ":vitam",':ucrop', ":picture_library"

@@ -1,16 +1,19 @@
 package com.hnzx.hnrb.ui;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
@@ -21,19 +24,22 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.hnzx.hnrb.App;
 import com.hnzx.hnrb.MainActivity;
 import com.hnzx.hnrb.R;
 import com.hnzx.hnrb.constant.Constant;
+import com.hnzx.hnrb.loader.GlideApp;
 import com.hnzx.hnrb.network.Algorithm;
 import com.hnzx.hnrb.requestbean.GetAdsIndexReq;
 import com.hnzx.hnrb.responsebean.BaseBeanRsp;
 import com.hnzx.hnrb.responsebean.GetAdsRsp;
 import com.hnzx.hnrb.tools.CDUtil;
+import com.hnzx.hnrb.tools.GlideTools;
 import com.hnzx.hnrb.tools.IntentUtil;
 import com.hnzx.hnrb.tools.PackageUtil;
 import com.hnzx.hnrb.tools.PermissionCheckUtil;
@@ -135,29 +141,32 @@ public class WelcomeActivity extends AppCompatActivity {
                     ads = response.Info;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && WelcomeActivity.this.isDestroyed())
                         return;
-                    Glide.with(WelcomeActivity.this)
+                    GlideApp.with(WelcomeActivity.this)
                             .load(response.Info.thumb)
-                            .crossFade()
-                            .dontAnimate()
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .placeholder(getResources().getDrawable(R.drawable.bg_welcome_guide))
-                            .into(new GlideDrawableImageViewTarget(image) {
+                            .listener(new RequestListener<Drawable>() {
                                 @Override
-                                public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
-                                    super.onResourceReady(drawable, anim);
-                                    if (drawable != null && !WelcomeActivity.this.isFinishing()) {
+                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                    if (resource != null && !WelcomeActivity.this.isFinishing()) {
                                         if (timer != null) {
                                             timer.cancel();
                                             mHandler.removeMessages(GO_HOME);
                                             mHandler.removeMessages(GO_GUIDE);
                                         }
-                                        image.setImageDrawable(drawable);
+                                        image.setImageDrawable(resource);
                                         mTextViewTime.setVisibility(View.VISIBLE);
                                         task = new TimeTask(7000, 1000);
                                         task.start();
                                     }
+                                    return false;
                                 }
-                            });
+                            }).into(image);
                 }
             }
         }, null);
@@ -270,6 +279,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -333,13 +343,7 @@ public class WelcomeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if (data != null) {
                 ads = data;
-                Glide.with(WelcomeActivity.this)
-                        .load(data.thumb)
-                        .crossFade()
-                        .dontAnimate()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(getResources().getDrawable(R.drawable.bg_welcome_guide))
-                        .into(image);
+                GlideTools.Glide(WelcomeActivity.this, data.thumb, image, R.drawable.bg_welcome_guide);
                 if (timer != null) {
                     timer.cancel();
                     mHandler.removeMessages(GO_HOME);

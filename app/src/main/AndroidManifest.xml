@@ -328,6 +328,7 @@
         <!-- 话题评论页 -->
         <activity
             android:name=".ui.interact.TopicCommentActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <!--话题评论回复列表页-->
         <activity

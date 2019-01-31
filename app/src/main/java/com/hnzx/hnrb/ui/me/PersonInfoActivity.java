@@ -3,7 +3,6 @@ package com.hnzx.hnrb.ui.me;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -23,20 +22,21 @@ import com.hnzx.hnrb.responsebean.BaseBeanRsp;
 import com.hnzx.hnrb.responsebean.UserInfoRsp;
 import com.hnzx.hnrb.tools.DialogUtil;
 import com.hnzx.hnrb.tools.GlideTools;
-import com.hnzx.hnrb.tools.LogUtil;
 import com.hnzx.hnrb.tools.PermissionCheckUtil;
-import com.hnzx.hnrb.ui.LoginActivity;
 import com.hnzx.hnrb.ui.dialog.InvitedCodeShareDialog;
 import com.hnzx.hnrb.ui.dialog.ModifySexDialog;
 import com.hnzx.hnrb.view.TopHeadView;
-import com.hnzx.hnrb.view.crop.Crop;
-import com.hnzx.hnrb.view.photopicker.PhotoPicker;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.tools.PictureFileUtils;
 import com.umeng.socialize.UMShareAPI;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -136,23 +136,16 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PhotoPicker.REQUEST_CODE && data != null) {
-            ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-            final String url = photos.get(0);
-            Uri mFile = Uri.fromFile(new File(url));
-            if (mFile != null) {
-                cropPickImage(mFile);
-            } else {
-                showTopToast("Uri can't be null", false);
-            }
-        } else if (requestCode == Crop.REQUEST_CROP && resultCode == Activity.RESULT_OK) {
-            Uri mCropFile = Crop.getOutput(data);
-            File myFile = new File(mCropFile.getPath());
-            String path = myFile.getAbsolutePath();
-            LogUtil.e("上传文件为：" + path);
-            uploadUserAvatar(myFile);
-        } else if (requestCode == REQUEST_CODE_MODIFY_NICK_NAME && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CODE_MODIFY_NICK_NAME && resultCode == Activity.RESULT_OK) {
             updateUserInfoContent();
+        } else if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    System.err.println(new File(selectList.get(0).getCutPath()).length());
+                    uploadUserAvatar(new File(selectList.get(0).getCutPath()));
+                    break;
+            }
         }
     }
 
@@ -211,18 +204,6 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-
-    /**
-     * 裁剪图片
-     *
-     * @param source
-     */
-    private void cropPickImage(Uri source) {
-        Uri destination = Uri.fromFile(new File(PersonInfoActivity.this.getCacheDir(), "cropped.jpg"));
-        this.getExternalFilesDir(null);
-        Crop.of(source, destination).asSquare().start(this);
-    }
-
     @Override
     public void onClick(View view) {
         final int viewId = view.getId();
@@ -231,13 +212,24 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                 PermissionCheckUtil.getInstance(this).checkPermission(this, new PermissionCheckUtil.CheckListener() {
                     @Override
                     public void isPermissionOn() {
-                        // 选择图片
-                        PhotoPicker.builder()
-                                .setPhotoCount(1)
-                                .setShowCamera(true)
-                                .setShowGif(false)
-                                .setPreviewEnabled(false)
-                                .start(PersonInfoActivity.this, PhotoPicker.REQUEST_CODE);
+                        PictureSelector.create(PersonInfoActivity.this)
+                                .openGallery(PictureMimeType.ofImage())
+                                .imageSpanCount(4)// 每行显示个数 int
+                                .selectionMode(PictureConfig.SINGLE)
+                                .previewImage(true)
+                                .isCamera(true)
+                                .imageFormat(PictureMimeType.PNG)
+                                .isZoomAnim(true)
+                                .sizeMultiplier(0.5f)
+                                .setOutputCameraPath("/CustomPath")
+                                .enableCrop(true)
+                                .withAspectRatio(1, 1)
+                                .freeStyleCropEnabled(true)
+                                .showCropFrame(true)
+                                .showCropGrid(true)
+                                .rotateEnabled(true)
+                                .scaleEnabled(true)
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
                     }
 
                     @Override
@@ -345,5 +337,11 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                     }
                 });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PictureFileUtils.deleteCacheDirFile(this);
     }
 }

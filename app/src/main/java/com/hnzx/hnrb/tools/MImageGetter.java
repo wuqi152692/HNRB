@@ -1,17 +1,16 @@
 package com.hnzx.hnrb.tools;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LevelListDrawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.hnzx.hnrb.loader.GlideApp;
 
 /**
  * @author: mingancai
@@ -27,21 +26,23 @@ public class MImageGetter implements Html.ImageGetter {
         this.container = text;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public Drawable getDrawable(String source) {
-        final LevelListDrawable drawable = new LevelListDrawable();
-        Glide.with(c).load(source).asBitmap().fitCenter().into(new SimpleTarget<Bitmap>() {
+
+        final Drawable[] drawable = new Drawable[1];
+
+        GlideApp.with(c).load(source).fitCenter().into(new SimpleTarget<Drawable>() {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                 if (resource != null) {
-                    BitmapDrawable bitmapDrawable = new BitmapDrawable(resource);
-                    drawable.addLevel(1, 1, bitmapDrawable);
-                    drawable.setBounds(0, 0, resource.getWidth(), resource.getHeight());
-                    drawable.setLevel(1);
+                    drawable[0] = resource;
+                    drawable[0].setBounds(0, 0, resource.getIntrinsicWidth(), resource.getIntrinsicHeight());
+                    container.invalidate();
                     container.setText(container.getText());
                 }
             }
         });
-        return drawable;
+        return drawable[0];
     }
 }

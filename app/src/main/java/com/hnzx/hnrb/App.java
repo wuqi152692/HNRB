@@ -177,6 +177,10 @@ public class App extends Application {
         queue.add(request);
     }
 
+    public void doPostPublishMsg(String url, String topic_id, String quoted, String id, String content, List<File> files, Callback callback) {
+        doPostPublishMsg(url,topic_id,quoted,id,content,files,callback,null);
+    }
+
     /**
      * 发布
      *
@@ -185,7 +189,7 @@ public class App extends Application {
      * @param files
      * @param callback
      */
-    public void doPostPublishMsg(String url, String topic_id, String quoted, String id, String content, List<File> files, Callback callback) {
+    public void doPostPublishMsg(String url, String topic_id, String quoted, String id, String content, List<File> files, Callback callback,String videoName) {
 
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (quoted != null && quoted.length() > 0)
@@ -199,8 +203,13 @@ public class App extends Application {
                 builder.addFormDataPart("imgs[]", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
             }
         }
+        if(videoName!=null && videoName.length()>0){
+            builder.addFormDataPart("video",videoName);
+        }
         if (content != null && content.length() > 0)
             builder.addFormDataPart("content", content);
+
+        builder.addFormDataPart("phone_type","0");
 
         MultipartBody requestBody = builder.build();
 

@@ -40,7 +40,7 @@ public class SquareSelectionAdapter extends BaseAdapter<GetPoliticsFeaturedRsp.J
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final GetPoliticsFeaturedRsp.JingpintuijianBean bean = getItem(position);
         ViewHolder mHolder = (ViewHolder) holder;
-        GlideTools.GlideRounded(mContext, bean.thumb, mHolder.image, R.drawable.bg_morentu_datumoshi, 0);
+        GlideTools.GlideRounded(mContext, bean.thumb, mHolder.image, R.drawable.bg_morentu_datumoshi, 1);
         mHolder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

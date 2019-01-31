@@ -11,8 +11,10 @@ import com.hnzx.hnrb.R;
 import com.hnzx.hnrb.base.BaseActivity;
 import com.hnzx.hnrb.tools.GlideTools;
 import com.hnzx.hnrb.tools.PermissionCheckUtil;
-import com.hnzx.hnrb.ui.live.PublishActivity;
-import com.hnzx.hnrb.view.photopicker.PhotoPicker;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.zhy.autolayout.utils.AutoUtils;
 
 /**
@@ -20,12 +22,16 @@ import com.zhy.autolayout.utils.AutoUtils;
  * @Time: 2017/5/19 0019.
  */
 
-public class PublishImageAdapter extends BaseAdapter<String> {
+public class PublishImageAdapter extends BaseAdapter<LocalMedia> {
     private final int IMAGE_TYPE = 0;
     private final int ADD_TYPE = 1;
+    private Context context;
+    private boolean isTypeAll;
 
-    public PublishImageAdapter(Context context) {
+    public PublishImageAdapter(Context context, boolean isTypeAll) {
         super(context);
+        this.context = context;
+        this.isTypeAll = isTypeAll;
     }
 
     @Override
@@ -45,7 +51,7 @@ public class PublishImageAdapter extends BaseAdapter<String> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == IMAGE_TYPE) {
             ViewHolder mHolder = (ViewHolder) holder;
-            GlideTools.Glide(mContext, getItem(position), mHolder.image, R.drawable.bg_morentu_xiaotumoshi);
+            GlideTools.Glide(mContext, getItem(position).getPath(), mHolder.image, R.drawable.bg_morentu_xiaotumoshi);
             mHolder.del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -61,16 +67,28 @@ public class PublishImageAdapter extends BaseAdapter<String> {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (position != 0 && getItem(0).getPictureType().contains("video/"))
+                        return;
                     PermissionCheckUtil.getInstance(mContext).checkPermission((Activity) mContext, new PermissionCheckUtil.CheckListener() {
                         @Override
                         public void isPermissionOn() {
-                            // 选择图片
-                            PhotoPicker.builder()
-                                    .setPhotoCount(3 - position)
-                                    .setShowCamera(true)
-                                    .setShowGif(false)
-                                    .setPreviewEnabled(false)
-                                    .start((Activity) mContext, PhotoPicker.REQUEST_CODE);
+                            PictureSelector.create((Activity) context)
+                                    .openGallery(isTypeAll && (position == 0 || getItem(0).getPictureType().contains("image/")) ? PictureMimeType.ofAll() : PictureMimeType.ofImage())
+                                    .selectionMode(PictureConfig.SINGLE)
+                                    .previewImage(true)
+                                    .previewVideo(true)
+                                    .isCamera(true)
+                                    .enableCrop(false)
+                                    .compress(true)
+                                    .glideOverride(160, 160)
+                                    .previewEggs(true)
+                                    .withAspectRatio(1, 1)
+                                    .hideBottomControls(false)
+                                    .isGif(false)
+                                    .freeStyleCropEnabled(true)
+                                    .circleDimmedLayer(true)
+                                    .openClickSound(true)
+                                    .forResult(PictureConfig.CHOOSE_REQUEST);
                         }
 
                         @Override

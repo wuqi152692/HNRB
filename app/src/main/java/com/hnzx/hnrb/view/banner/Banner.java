@@ -2,7 +2,6 @@ package com.hnzx.hnrb.view.banner;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,10 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.hnzx.hnrb.R;
+import com.hnzx.hnrb.loader.GlideApp;
+import com.hnzx.hnrb.tools.GlideTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -217,17 +215,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             if (imageListener != null) {
                 imageListener.OnLoadImage(iv, url);
             } else {
-                Glide.with(context)
-                        .load(url).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(defaultImage)
-                        .dontAnimate()
-                        .into(new GlideDrawableImageViewTarget(iv) {
-                            @Override
-                            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                                super.onLoadFailed(e, errorDrawable);
-                                this.onStart();
-                            }
-                        });
+                GlideApp.with(context).load(url).placeholder(defaultImage).centerCrop().into(iv);
             }
         }
         setData();
@@ -256,11 +244,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             if (imageListener != null) {
                 imageListener.OnLoadImage(iv, url);
             } else {
-                Glide.with(context)
-                        .load(url).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(defaultImage)
-                        .dontAnimate()
-                        .into(iv);
+                GlideApp.with(context).load(url).placeholder(defaultImage).centerCrop().into(iv);
             }
         }
         setData();

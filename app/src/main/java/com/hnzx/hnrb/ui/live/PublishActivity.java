@@ -2,15 +2,12 @@ package com.hnzx.hnrb.ui.live;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -23,9 +20,10 @@ import com.hnzx.hnrb.network.Algorithm;
 import com.hnzx.hnrb.network.GetData;
 import com.hnzx.hnrb.responsebean.BaseBeanRsp;
 import com.hnzx.hnrb.tools.DialogUtil;
-import com.hnzx.hnrb.tools.PermissionCheckUtil;
-import com.hnzx.hnrb.ui.me.PersonInfoActivity;
-import com.hnzx.hnrb.view.photopicker.PhotoPicker;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.tools.PictureFileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,14 +65,14 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        adapter = new PublishImageAdapter(this);
+        adapter = new PublishImageAdapter(this, false);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void initData() {
-        List<String> data = new ArrayList<>();
-        data.add("");
+        List<LocalMedia> data = new ArrayList<>();
+        data.add(new LocalMedia());
         adapter.setList(data);
     }
 
@@ -89,9 +87,9 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.publish:
                 files = new ArrayList<>();
-                for (String url : adapter.getList()) {
-                    if (url != null && url.length() > 1)
-                        files.add(new File(url));
+                for (LocalMedia media : adapter.getList()) {
+                    if (media != null)
+                        files.add(new File(media.getPath()));
                 }
                 if (TextUtils.isEmpty(editText.getText()) && files.size() <= 0) {
                     showTopToast("发布内容为空", true);
@@ -107,17 +105,14 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PhotoPicker.REQUEST_CODE && data != null) {
-            ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
-            List<String> adapterDatas = adapter.getList();
-            if (adapterDatas.size() == 1) {
-                photos.addAll(adapterDatas);
-            } else {
-                adapterDatas.remove(adapterDatas.size() - 1);
-                photos.addAll(0, adapterDatas);
-                photos.add("");
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    adapter.setList(selectList);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
-            adapter.setList(photos);
         }
     }
 
@@ -141,7 +136,7 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
                                     App.getInstance().getLoginInfo().auth_key)
                                     .toString(), GetData.encode).toLowerCase();
 
-            App.getInstance().doPostPublishMsg(path, null,null, null, content, files, new Callback() {
+            App.getInstance().doPostPublishMsg(path, null, null, null, content, files, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     DialogUtil.dismissDialog();
@@ -162,5 +157,11 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PictureFileUtils.deleteCacheDirFile(this);
     }
 }

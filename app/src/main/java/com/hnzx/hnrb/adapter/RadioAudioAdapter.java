@@ -22,7 +22,6 @@ import com.hnzx.hnrb.tools.PermissionCheckUtil;
 import com.hnzx.hnrb.ui.me.PersonInfoActivity;
 import com.hnzx.hnrb.view.PlayView;
 import com.hnzx.hnrb.view.SoundTrackView;
-import com.hnzx.hnrb.view.photopicker.PhotoPicker;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.io.IOException;

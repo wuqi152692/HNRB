@@ -8,101 +8,96 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.hnzx.hnrb.loader.GlideApp;
 
 /**
- *
+ *Glide 加载图片工具
  */
 public class GlideTools {
 
-    public static void GlideGif(Context context, String imgUrl, ImageView view, int resourceId) {
-        if (imgUrl.contains(".gif"))
-            Glide.with(context).load(imgUrl).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(resourceId).fitCenter()
-                    .into(view);
-        else
-            Glide(context, imgUrl, view, resourceId);
+    public static void onDestory(Context context) {
+        if (context != null) {
+            GlideApp.get(context).clearMemory();
+        }
+    }
 
+    /**
+     * 正常加载
+     *
+     * @param context
+     * @param url
+     * @param view
+     * @param resourceId      默认图类型
+     */
+    public static void GlideGif(Context context, String url, ImageView view, int resourceId) {
+        GlideApp.with(context).load(url).placeholder(resourceId).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(view);
     }
 
     public static void GlideNofit(Context context, String imgUrl, ImageView view, int resourceId) {
-        if (imgUrl.contains(".gif"))
-            Glide.with(context).load(imgUrl).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(resourceId)
-                    .into(view);
-        else
-            Glide.with(context).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(resourceId).into(view);
-
-    }
-
-    public static void GlideNoId(Context context, String imgUrl, ImageView view) {
-        if (imgUrl.contains(".gif"))
-            Glide.with(context).load(imgUrl).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(view);
-        else
-            Glide.with(context).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(view);
-
-    }
-
-    public static void Glide(Context context, String imgUrl, ImageView view, int resourceId) {
-        Glide.with(context).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(resourceId).dontAnimate().into(view);
-    }
-
-    public static void Glide(Context context, String imgUrl, ImageView view, Drawable resource) {
-        Glide.with(context).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(resource).dontAnimate().into(view);
+        GlideGif(context,imgUrl,view,resourceId);
     }
 
     /**
-     * Glide 加载圆行图片
+     * 正常加载(centerCrop)
      *
-     * @param imgUrl
-     * @param view
-     * @param resourceId
+     * @param context
+     * @param url
+     * @param imageView
      */
-    public static void GlideRound(Context context, String imgUrl, ImageView view, int resourceId) {
-        Glide.with(context).load(imgUrl).asBitmap().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(resourceId).centerCrop()
-                .into(new BitmapImageViewTarget(view) {
-                    @Override
-                    protected void setResource(Bitmap resource) {
-                        RoundedBitmapDrawable circularBitmapDrawable =
-                                RoundedBitmapDrawableFactory.create(view.getContext().getResources(), resource);
-                        circularBitmapDrawable.setCircular(true);
-                        view.setImageDrawable(circularBitmapDrawable);
-                    }
-                });
+    public static void GlideNoId(Context context, String url, ImageView imageView) {
+        GlideApp.with(context).load(url).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 
     /**
-     * Glide 加载圆角图片
+     * 正常加载
      *
-     * @param imgUrl
-     * @param view
-     * @param resourceId
+     * @param context
+     * @param url
+     * @param imageView
      */
-    public static void GlideRounded(Context context, String imgUrl, ImageView view, int resourceId, final int px) {
-        if (!imgUrl.endsWith(".gif"))
-            Glide.with(context).load(imgUrl).asBitmap().dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(resourceId).centerCrop()
-                    .into(new BitmapImageViewTarget(view) {
-                        @Override
-                        protected void setResource(Bitmap resource) {
-                            RoundedBitmapDrawable roundedBitmapDrawable =
-                                    RoundedBitmapDrawableFactory.create(view.getContext().getResources(), resource);
-                            roundedBitmapDrawable.setCornerRadius(px);//设置圆角半径（根据实际需求）
-                            roundedBitmapDrawable.setAntiAlias(true);  //设置反走样
-                            view.setImageDrawable(roundedBitmapDrawable);
-                        }
-                    });
-        else
-            Glide.with(context).load(imgUrl).asGif()
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE).placeholder(resourceId).fitCenter()
-                    .into(view);
+    public static void glide(Context context, String url, ImageView imageView, int type) {
+        GlideApp.with(context).load(url).placeholder(type).centerCrop().into(imageView);
     }
 
+    /**
+     * 正常加载
+     *
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public static void Glide(Context context, String url, ImageView imageView, int type) {
+        GlideApp.with(context).load(url).placeholder(type).centerCrop().into(imageView);
+    }
 
+    /**
+     * 加载圆形图片(支持)
+     *
+     * @param context
+     * @param url
+     * @param view
+     * @param resourceId      默认图类型
+     */
+    public static void GlideRound(Context context, String url, ImageView view, int resourceId) {
+        GlideApp.with(context).load(url).placeholder(resourceId).circleCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(view);
+    }
+
+    /**
+     * 加载圆角图片（可支持定义显示角度）
+     *
+     * @param context
+     * @param url
+     * @param view
+     * @param resourceId      默认图类型
+     * @param rounded   圆角角度
+     */
+    public static void GlideRounded(Context context, String url, ImageView view, int resourceId, int rounded) {
+        GlideApp.with(context).load(url).placeholder(resourceId)
+                .transform(new MultiTransformation(new CenterCrop(), new RoundedCorners(rounded))).into(view);
+    }
 }
