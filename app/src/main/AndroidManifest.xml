@@ -32,6 +32,8 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -70,6 +72,9 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
+
+        <!-- 腾讯云多渠道打包 -->
+        <meta-data android:name="channel" android:value="test"/>
 
         <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
@@ -128,6 +133,17 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <!--协议部分，随便设置-->
+                <data android:scheme="hnrbapp
+"/>
+                <!--下面这几行也必须得设置-->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
             </intent-filter>
         </activity>
         <!-- 引导页 -->
@@ -392,6 +408,8 @@
         <service android:name=".ui.audio.MusicService" />
 
         <activity android:name=".ui.live.VideoFullScreenActivity" />
+
+
 
     </application>
 
